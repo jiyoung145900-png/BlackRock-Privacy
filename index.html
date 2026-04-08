@@ -6,15 +6,14 @@
   <title>개인정보 수집 및 이용 동의서 | BlackRock Labs</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    /* 1. 디자인 시스템 변수 설정 */
     :root {
       --bg-color: #04060a;
-      --card-bg: rgba(15, 18, 29, 0.75);
+      --card-bg: rgba(15, 18, 29, 0.8);
       --accent-color: #00b4ff;
-      --border-color: rgba(255, 255, 255, 0.12);
+      --border-color: rgba(255, 255, 255, 0.1);
       --text-main: #f0f0f0;
       --text-sub: #9eb1cd;
-      --input-bg: rgba(26, 31, 46, 0.6);
+      --input-bg: rgba(26, 31, 46, 0.7);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,66 +29,34 @@
       overflow-x: hidden;
     }
 
-    /* 2. 하이엔드 프리미엄 배경 시스템 */
+    /* --- 하이엔드 배경 시스템 --- */
     .hero-bg {
       position: fixed;
       inset: 0;
       z-index: -1;
-      background-color: var(--bg-color);
-    }
-
-    .bg-image {
-      position: absolute;
-      inset: 0;
-      background-image: url('background.jpg'); /* 매니저님이 가진 배경 파일명 */
+      background-image: url('background.jpg');
       background-size: cover;
       background-position: center;
-      opacity: 0.5;
-      filter: brightness(0.4) blur(8px);
+      filter: brightness(0.3) blur(15px);
     }
 
     .bg-overlay {
-      position: absolute;
+      position: fixed;
       inset: 0;
-      background: radial-gradient(circle at center, transparent 0%, var(--bg-color) 100%);
-      backdrop-filter: saturate(120%);
+      z-index: -1;
+      background: radial-gradient(circle at 50% 0%, rgba(0, 180, 255, 0.1) 0%, transparent 70%);
     }
 
-    .bg-grid {
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(rgba(0, 180, 255, 0.1) 1px, transparent 1px);
-      background-size: 45px 45px;
-      opacity: 0.5;
-    }
-
-    /* 은은하게 움직이는 라이팅 포인트 */
-    .bg-light {
-      position: absolute;
-      width: 60vw;
-      height: 60vw;
-      background: radial-gradient(circle, rgba(0, 180, 255, 0.08) 0%, transparent 70%);
-      top: -10%;
-      right: -10%;
-      filter: blur(100px);
-      animation: float 20s infinite alternate;
-    }
-
-    @keyframes float {
-      from { transform: translate(0, 0); }
-      to { transform: translate(-10%, 10%); }
-    }
-
-    /* 3. 동의서 카드 디자인 (글래스모피즘 적용) */
+    /* --- 메인 카드 디자인 --- */
     .agreement-card {
       width: 100%;
       max-width: 700px;
       background: var(--card-bg);
-      backdrop-filter: blur(25px) saturate(180%);
+      backdrop-filter: blur(20px);
       border: 1px solid var(--border-color);
-      border-radius: 28px;
+      border-radius: 24px;
       padding: 50px;
-      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 180, 255, 0.05);
       position: relative;
     }
 
@@ -99,22 +66,21 @@
     }
 
     .header h1 {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 700;
       color: #fff;
       letter-spacing: -1px;
-      margin-bottom: 10px;
     }
 
-    .header .sub-header {
-      color: var(--accent-color);
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+    .header .top-line {
+      width: 40px;
+      height: 3px;
+      background: var(--accent-color);
+      margin: 0 auto 20px;
+      border-radius: 10px;
     }
 
-    /* 입력 폼 스타일 */
+    /* --- 입력 폼 그리드 --- */
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -127,182 +93,196 @@
     @media (max-width: 580px) {
       .form-grid { grid-template-columns: 1fr; }
       .agreement-card { padding: 35px 25px; }
-      .header h1 { font-size: 22px; }
     }
 
     label {
       font-size: 13px;
-      font-weight: 600;
       color: var(--text-sub);
       margin-bottom: 10px;
-      margin-left: 4px;
+      font-weight: 500;
     }
 
     input, select {
       background: var(--input-bg);
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      padding: 14px 18px;
+      padding: 15px;
       color: #fff;
       font-size: 15px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s;
     }
 
     input:focus, select:focus {
       outline: none;
       border-color: var(--accent-color);
-      background: rgba(26, 31, 46, 0.9);
-      box-shadow: 0 0 20px rgba(0, 180, 255, 0.15);
+      box-shadow: 0 0 15px rgba(0, 180, 255, 0.2);
     }
 
-    /* 법적 공지사항 박스 */
+    /* --- 법적 안내문 --- */
     .law-box {
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
       padding: 25px;
       font-size: 14px;
       color: var(--text-sub);
       line-height: 1.8;
       margin-bottom: 40px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      position: relative;
-      overflow: hidden;
+      border-left: 3px solid var(--accent-color);
     }
 
-    .law-box::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 4px;
-      background: var(--accent-color);
-    }
-
-    /* 하단 서명 및 제출 섹션 */
-    .signature-area {
-      text-align: center;
-      margin-top: 60px;
-    }
-
-    .date {
-      font-size: 18px;
-      font-weight: 500;
-      margin-bottom: 35px;
+    /* --- 날짜 선택 영역 (수정 가능하게 변경) --- */
+    .date-selection {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 40px;
       color: var(--text-main);
-      font-family: 'Inter';
+      font-size: 18px;
+      font-weight: 600;
     }
 
+    .date-selection select {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid var(--accent-color);
+      border-radius: 0;
+      padding: 5px 10px;
+      font-size: 18px;
+      font-weight: 700;
+      width: auto;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    /* --- 제출 버튼 --- */
     .btn-submit {
       width: 100%;
-      background: linear-gradient(135deg, var(--accent-color) 0%, #0076ff 100%);
+      background: linear-gradient(135deg, var(--accent-color), #0076ff);
       color: #fff;
       border: none;
       padding: 20px;
-      border-radius: 16px;
+      border-radius: 14px;
       font-size: 18px;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.4s;
+      transition: all 0.3s;
       box-shadow: 0 10px 30px rgba(0, 180, 255, 0.3);
     }
 
     .btn-submit:hover {
-      transform: translateY(-4px);
+      transform: translateY(-3px);
       box-shadow: 0 20px 40px rgba(0, 180, 255, 0.5);
-      filter: brightness(1.1);
     }
-
-    .btn-submit:active { transform: translateY(-1px); }
 
     .company-footer {
       margin-top: 50px;
       text-align: center;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.3);
-      letter-spacing: 1px;
+      font-size: 14px;
+      color: #444;
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
 
-  <div class="hero-bg">
-    <div class="bg-image"></div>
-    <div class="bg-overlay"></div>
-    <div class="bg-light"></div>
-    <div class="bg-grid"></div>
+<div class="hero-bg"></div>
+<div class="bg-overlay"></div>
+
+<div class="agreement-card">
+  <div class="header">
+    <div class="top-line"></div>
+    <h1>개인정보 수집 및 이용 동의서</h1>
   </div>
 
-  <div class="agreement-card">
-    <div class="header">
-      <div class="sub-header">Data-Driven Investment</div>
-      <h1>개인정보 수집 및 이용 동의서</h1>
+  <form id="agreementForm">
+    <div class="form-grid">
+      <div class="input-group">
+        <label>성명</label>
+        <input type="text" placeholder="성함을 입력하세요" required>
+      </div>
+      <div class="input-group">
+        <label>나이</label>
+        <input type="number" placeholder="예: 47" required>
+      </div>
+      <div class="input-group">
+        <label>성별</label>
+        <select required>
+          <option value="male">남성</option>
+          <option value="female">여성</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>거주지</label>
+        <input type="text" placeholder="시/군/구 단위" required>
+      </div>
+      <div class="input-group">
+        <label>투자 기간</label>
+        <input type="text" placeholder="예: 5년" required>
+      </div>
+      <div class="input-group">
+        <label>투자 자금</label>
+        <input type="text" placeholder="예: 1억원" required>
+      </div>
+      <div class="input-group" style="grid-column: span 2;">
+        <label>보유 종목</label>
+        <input type="text" placeholder="주요 보유 종목을 적어주세요">
+      </div>
     </div>
 
-    <form id="agreementForm">
-      <div class="form-grid">
-        <div class="input-group">
-          <label>성명</label>
-          <input type="text" placeholder="홍길동" required>
-        </div>
-        <div class="input-group">
-          <label>나이</label>
-          <input type="number" placeholder="47" required>
-        </div>
-        <div class="input-group">
-          <label>성별</label>
-          <select required>
-            <option value="">선택</option>
-            <option value="male">남성</option>
-            <option value="female">여성</option>
-          </select>
-        </div>
-        <div class="input-group">
-          <label>거주지</label>
-          <input type="text" placeholder="서울시 강남구" required>
-        </div>
-        <div class="input-group">
-          <label>투자 기간</label>
-          <input type="text" placeholder="예: 3년" required>
-        </div>
-        <div class="input-group">
-          <label>투자 자금</label>
-          <input type="text" placeholder="예: 5,000만원" required>
-        </div>
-        <div class="input-group" style="grid-column: span 2;">
-          <label>보유 종목</label>
-          <input type="text" placeholder="예: 삼성전자, 테슬라 등" style="grid-column: span 2;">
-        </div>
-      </div>
-
-      <div class="law-box">
-        블랙록자산운용은 개인정보보호법 제 30 조에 따라 정보주체(고객)의 개인정보 보호 및 권익을 보호하고 개인정보와 관련한 정보주체의 고충을 원활하게 처리하고 있습니다. <br><br>
-        본 방침은 관련 법령의 제개정 및 회사의 운용방침에 따라 변경될 수 있으며, 변경시 개인 매니저 및 블랙록 플랫폼 내부에서 확인 가능 합니다.
-      </div>
-
-      <div class="signature-area">
-        <div class="date" id="currentDate">2026년 04월 08일</div>
-        <button type="submit" class="btn-submit">내용에 동의하며 제출하기</button>
-      </div>
-    </form>
-
-    <div class="company-footer">
-      <strong>BLACKROCK ASSET MANAGEMENT KOREA</strong>
+    <div class="law-box">
+      블랙록자산운용은 개인정보보호법에 따라 고객님의 정보를 안전하게 보호합니다. 본 동의서를 통해 수집된 정보는 전문적인 투자 자문 및 서비스 최적화 용도로만 사용됩니다.
     </div>
+
+    <div class="date-selection">
+      <span>2026년</span>
+      <select id="monthSelect"></select>
+      <span>월</span>
+      <select id="daySelect"></select>
+      <span>일</span>
+    </div>
+
+    <button type="submit" class="btn-submit">내용 확인 및 동의 완료</button>
+  </form>
+
+  <div class="company-footer">
+    BLACKROCK ASSET MANAGEMENT KOREA
   </div>
+</div>
 
-  <script>
-    // 오늘 날짜 자동 설정
-    const d = new Date();
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const date = String(d.getDate()).padStart(2, '0');
-    document.getElementById('currentDate').innerText = `${year}년 ${month}월 ${date}일`;
+<script>
+  // 월/일 셀렉트 박스 동적 생성 및 현재 날짜 초기값 세팅
+  const monthSelect = document.getElementById('monthSelect');
+  const daySelect = document.getElementById('daySelect');
+  const now = new Date();
 
-    // 폼 제출 이벤트
-    document.getElementById('agreementForm').onsubmit = function(e) {
-      e.preventDefault();
-      alert('동의서가 보안 서버로 안전하게 전송되었습니다.');
-    };
-  </script>
+  // 월 생성 (1-12)
+  for (let m = 1; m <= 12; m++) {
+    let opt = document.createElement('option');
+    opt.value = m;
+    opt.innerHTML = m;
+    if (m === now.getMonth() + 1) opt.selected = true;
+    monthSelect.appendChild(opt);
+  }
+
+  // 일 생성 (1-31)
+  function updateDays() {
+    daySelect.innerHTML = '';
+    for (let d = 1; d <= 31; d++) {
+      let opt = document.createElement('option');
+      opt.value = d;
+      opt.innerHTML = d;
+      if (d === now.getDate()) opt.selected = true;
+      daySelect.appendChild(opt);
+    }
+  }
+  updateDays();
+
+  document.getElementById('agreementForm').onsubmit = function(e) {
+    e.preventDefault();
+    alert('동의가 정상적으로 완료되었습니다.');
+  };
+</script>
 
 </body>
 </html>
