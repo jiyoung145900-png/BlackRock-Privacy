@@ -6,274 +6,271 @@
   <title>블랙록 개인정보 동의서</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    /* 기본 초기화 및 배경 설정 */
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    :root {
+      --br-navy: #0d2f52;
+      --br-border: #0d2f52;
+      --br-bg-light: rgba(240, 243, 246, 0.8);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
     
     body {
+      background-color: #f0f0f0;
       font-family: 'Noto Sans KR', sans-serif;
-      background-color: #f4f7f9;
       display: flex;
       justify-content: center;
-      padding: 0;
-      color: #1a1a1a;
-    }
-
-    /* 전체 컨테이너: 이미지 배경 삽입 구간 */
-    .document-wrapper {
-      width: 100%;
-      max-width: 600px; /* 모바일 가독성 최적화 너비 */
       min-height: 100vh;
-      background-color: #ffffff;
-      position: relative;
-      /* 전달해주신 배경 이미지를 아래 url에 넣으시면 됩니다 */
-      background-image: url('be.png'); 
-      background-size: cover;
-      background-position: center top;
-      background-repeat: no-repeat;
-      padding: 180px 30px 60px; /* 상단 패턴 영역 확보 */
     }
 
-    .title-section {
+    /* 전체 컨테이너: 배경 이미지를 여기에 넣으세요 */
+    .doc-container {
+      width: 100%;
+      max-width: 700px;
+      background-color: #fff;
+      position: relative;
+      /* 업로드하신 배경 이미지 경로를 지정하세요 */
+      background-image: url('your_background_image.jpg'); 
+      background-size: 100% auto;
+      background-position: top center;
+      background-repeat: no-repeat;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    /* 이미지와 폼이 겹치지 않게 조절하는 여백 */
+    .content-overlay {
+      padding: 220px 40px 60px; /* 상단 로고/패턴 높이에 맞춰 조절 */
+    }
+
+    .doc-title {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--br-navy);
       text-align: center;
       margin-bottom: 40px;
-    }
-
-    .title-section h1 {
-      font-size: 28px;
-      font-weight: 900;
-      color: #0d2f52;
       letter-spacing: -1px;
     }
 
-    /* 입력 테이블 스타일 */
-    .form-table {
+    /* 테이블 구조 복구 */
+    .data-table {
       width: 100%;
-      border: 2px solid #0d2f52;
-      border-bottom: none;
-      background: rgba(255, 255, 255, 0.85); /* 배경 이미지 투과 대비 */
-      backdrop-filter: blur(5px);
+      border: 2.5px solid var(--br-border);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(3px);
       margin-bottom: 30px;
     }
 
-    .form-row {
+    .row {
       display: flex;
-      border-bottom: 2px solid #0d2f52;
-      align-items: stretch;
+      border-bottom: 1.5px solid var(--br-border);
+      min-height: 55px;
     }
 
-    .form-label {
-      flex: 0 0 100px;
-      background: #f0f3f6;
-      padding: 15px 10px;
-      font-size: 14px;
+    .row:last-child { border-bottom: none; }
+
+    .label {
+      flex: 0 0 110px;
+      background: var(--br-bg-light);
+      color: var(--br-navy);
       font-weight: 700;
-      color: #0d2f52;
-      border-right: 2px solid #0d2f52;
+      font-size: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
+      border-right: 1.5px solid var(--br-border);
       text-align: center;
     }
 
-    .form-input {
+    .input-field {
       flex: 1;
       padding: 10px 15px;
       display: flex;
       align-items: center;
     }
 
-    .form-input input, .form-input select {
+    .input-field input, .input-field select {
       width: 100%;
       border: none;
-      outline: none;
-      font-size: 15px;
       background: transparent;
-      font-family: 'Noto Sans KR', sans-serif;
-      color: #333;
+      font-size: 16px;
+      outline: none;
+      font-family: inherit;
     }
 
     /* 법률 안내 문구 */
-    .legal-text {
-      font-size: 13px;
-      line-height: 1.7;
-      color: #444;
+    .legal-box {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #333;
       margin-bottom: 40px;
       word-break: keep-all;
     }
 
-    /* 날짜 선택 */
-    .date-row {
+    /* 날짜/서명 섹션 */
+    .date-selection {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 18px;
+    }
+
+    .date-selection select {
+      border: none;
+      border-bottom: 2px solid #333;
+      font-weight: 700;
+      font-size: 18px;
+      margin: 0 5px;
+    }
+
+    .signature-area {
       text-align: center;
       margin-bottom: 40px;
-      font-size: 16px;
-      font-weight: 500;
     }
 
-    .date-row select {
-      border: none;
-      border-bottom: 1.5px solid #0d2f52;
-      font-size: 16px;
-      padding: 2px 5px;
-      margin: 0 5px;
-      font-weight: 700;
-    }
-
-    /* 하단 서명란 */
-    .footer-section {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .company-name {
-      font-size: 18px;
-      font-weight: 700;
-      color: #0d2f52;
+    .comp-name {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--br-navy);
       margin-bottom: 15px;
     }
 
-    .manager-line {
+    .resp-line {
       display: inline-block;
-      width: 200px;
-      border-bottom: 1px solid #333;
+      width: 220px;
       text-align: left;
-      font-size: 14px;
+      border-bottom: 1px solid #000;
+      font-size: 15px;
       padding-bottom: 5px;
-      color: #555;
     }
 
-    /* 버튼 스타일 */
-    .btn-submit {
+    /* 제출 버튼 */
+    .submit-button {
       width: 100%;
-      padding: 20px;
-      background: #0d2f52;
-      color: #fff;
+      padding: 22px;
+      background: var(--br-navy);
+      color: white;
       border: none;
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 700;
-      border-radius: 4px;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(13, 47, 82, 0.2);
+      border-radius: 8px;
+      transition: 0.3s;
     }
 
-    /* 모바일 가독성 추가 보정 */
-    @media (max-width: 480px) {
-      .document-wrapper { padding-top: 140px; }
-      .title-section h1 { font-size: 24px; }
-      .form-label { flex: 0 0 85px; font-size: 13px; }
+    .submit-button:active { transform: scale(0.98); opacity: 0.9; }
+
+    /* 모바일 반응형 */
+    @media (max-width: 600px) {
+      .content-overlay { padding: 180px 20px 40px; }
+      .doc-title { font-size: 26px; }
+      .label { flex: 0 0 90px; font-size: 14px; }
     }
   </style>
 </head>
 <body>
 
-<div class="document-wrapper">
-  <div class="title-section">
-    <h1>블랙록 개인정보 동의서</h1>
+<div class="doc-container">
+  <div class="content-overlay">
+    <h1 class="doc-title">블랙록 개인정보 동의서</h1>
+
+    <form id="consentForm">
+      <div class="data-table">
+        <div class="row">
+          <div class="label">성 명</div>
+          <div class="input-field"><input type="text" placeholder="성함 입력" required></div>
+        </div>
+        <div class="row">
+          <div class="label">나 이</div>
+          <div class="input-field">
+            <select required>
+              <option value="">나이대 선택</option>
+              <option>20~30대</option>
+              <option>40~50대</option>
+              <option>60대 이상</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">성 별</div>
+          <div class="input-field">
+            <select required>
+              <option value="">선택</option>
+              <option>남성</option>
+              <option>여성</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">거 주 지</div>
+          <div class="input-field"><input type="text" placeholder="예: 서울 강남구" required></div>
+        </div>
+        <div class="row">
+          <div class="label">투자기간</div>
+          <div class="input-field"><input type="text" placeholder="예: 3년" required></div>
+        </div>
+        <div class="row">
+          <div class="label">투자금</div>
+          <div class="input-field"><input type="text" placeholder="예: 5천만원" required></div>
+        </div>
+        <div class="row">
+          <div class="label">보유종목</div>
+          <div class="input-field"><input type="text" placeholder="보유 종목명 입력"></div>
+        </div>
+        <div class="row">
+          <div class="label">수익현황</div>
+          <div class="input-field"><input type="text" placeholder="현재 수익률 등 입력"></div>
+        </div>
+      </div>
+
+      <div class="legal-box">
+        블랙록자산운용은 개인정보보호법 제 30 조에 따라 정보주체(고객)의 개인정보 보호 및 권익을 보호하고 개인정보와 관련한 정보주체의 고충을 원활하게 처리 하고 있습니다.<br>
+        본 방침은 관련 법령의 제·개정 및 회사의 운용방침에 따라 변경될 수 있습니다.
+      </div>
+
+      <div class="date-selection">
+        <span>2026년</span>
+        <select id="mSelect"></select><span>월</span>
+        <select id="dSelect"></select><span>일</span>
+      </div>
+
+      <div class="signature-area">
+        <div class="comp-name">블랙록자산운용주식회사 (비상장)</div>
+        <div class="resp-line">작성책임자: </div>
+      </div>
+
+      <button type="submit" class="submit-button">내용 확인 및 동의 완료</button>
+    </form>
   </div>
-
-  <form id="blackrockForm">
-    <div class="form-table">
-      <div class="form-row">
-        <div class="form-label">성 명</div>
-        <div class="form-input"><input type="text" placeholder="성함을 입력하세요" required></div>
-      </div>
-      <div class="form-row">
-        <div class="form-label">나 이</div>
-        <div class="form-input">
-          <select required>
-            <option value="">나이 선택</option>
-            <option>20대</option><option>30대</option><option>40대</option>
-            <option>50대</option><option>60대 이상</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-label">성 별</div>
-        <div class="form-input">
-          <select required>
-            <option value="">성별 선택</option>
-            <option>남성</option><option>여성</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-label">거 주 지</div>
-        <div class="form-input"><input type="text" placeholder="시/군/구 단위 입력" required></div>
-      </div>
-      <div class="form-row">
-        <div class="form-label">투자기간</div>
-        <div class="form-input">
-          <select required>
-            <option value="">기간 선택</option>
-            <option>1년 미만</option><option>1~3년</option><option>3~5년</option><option>5년 이상</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-label">투자금</div>
-        <div class="form-input"><input type="text" placeholder="예: 5,000만원" required></div>
-      </div>
-      <div class="form-row">
-        <div class="form-label">보유종목</div>
-        <div class="form-input"><input type="text" placeholder="주요 보유 종목명"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-label">수익현황</div>
-        <div class="form-input"><input type="text" placeholder="예: +15%, -5% 등"></div>
-      </div>
-    </div>
-
-    <div class="legal-text">
-      블랙록자산운용은 개인정보보호법 제 30 조에 따라 정보주체(고객)의 개인정보 보호 및 권익을 보호하고 개인정보와 관련한 정보주체의 고충을 원활하게 처리하고 있습니다.<br><br>
-      본 방침은 관련 법령의 제·개정 및 회사의 운용방침에 따라 변경될 수 있으며, 변경 시 개인매니저 및 블랙록 플랫폼 내부에서 확인 가능합니다.
-    </div>
-
-    <div class="date-row">
-      <span>2026년</span>
-      <select id="month"></select><span>월</span>
-      <select id="day"></select><span>일</span>
-    </div>
-
-    <div class="footer-section">
-      <div class="company-name">블랙록자산운용주식회사 (비상장)</div>
-      <div class="manager-line">작성책임자: </div>
-    </div>
-
-    <button type="submit" class="btn-submit">내용 확인 및 동의 완료</button>
-  </form>
 </div>
 
 <script>
-  // 날짜 자동 생성을 위한 스크립트
-  const monthEl = document.getElementById('month');
-  const dayEl = document.getElementById('day');
-  const today = new Date();
+  // 날짜 선택 로직
+  const mSelect = document.getElementById('mSelect');
+  const dSelect = document.getElementById('dSelect');
+  const now = new Date();
 
   for(let m=1; m<=12; m++) {
     let opt = document.createElement('option');
     opt.value = m; opt.innerHTML = m;
-    if(m === today.getMonth()+1) opt.selected = true;
-    monthEl.appendChild(opt);
+    if(m === now.getMonth()+1) opt.selected = true;
+    mSelect.appendChild(opt);
   }
 
-  function setDays() {
-    dayEl.innerHTML = "";
-    const lastDay = new Date(2026, monthEl.value, 0).getDate();
+  function updateDays() {
+    dSelect.innerHTML = "";
+    const lastDay = new Date(2026, mSelect.value, 0).getDate();
     for(let d=1; d<=lastDay; d++) {
       let opt = document.createElement('option');
       opt.value = d; opt.innerHTML = d;
-      if(d === today.getDate()) opt.selected = true;
-      dayEl.appendChild(opt);
+      if(d === now.getDate()) opt.selected = true;
+      dSelect.appendChild(opt);
     }
   }
+  mSelect.onchange = updateDays;
+  updateDays();
 
-  monthEl.addEventListener('change', setDays);
-  setDays();
-
-  document.getElementById('blackrockForm').onsubmit = (e) => {
+  document.getElementById('consentForm').onsubmit = (e) => {
     e.preventDefault();
-    alert('개인정보 동의가 정상적으로 완료되었습니다.');
-  }
+    alert('동의가 정상적으로 처리되었습니다.');
+  };
 </script>
-
 </body>
 </html>
