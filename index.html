@@ -1,282 +1,209 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>블랙록 | 개인정보 동의서</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>블랙록 | 개인정보 동의서</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <style>
+    :root {
+      --primary-navy: #0d2f52;
+      --table-border: #0d2f52;
+      --label-bg: #f8fafc;
+      --input-height: 50px;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Noto Sans KR', sans-serif; background-color: #f2f2f2; padding: 20px 0; display: flex; flex-direction: column; align-items: center; }
 
-<style>
-:root{
-  --navy:#0d2f52;
-  --gold:#c9a14a;
-  --line:#1e3a5f;
-}
+    #document-canvas {
+      width: 100%; max-width: 650px; background-color: #fff; position: relative; overflow: hidden;
+      background-image: url('be.png'); background-size: 100% auto; background-position: top center; background-repeat: no-repeat;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+    }
 
-/* 전체 */
-body{
-  font-family:'Noto Sans KR',sans-serif;
-  background:#e9edf2;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:30px 0;
-}
+    .content-area { padding: 190px 40px 80px; }
+    .doc-title { font-size: 30px; font-weight: 900; color: var(--primary-navy); text-align: center; margin-bottom: 30px; letter-spacing: -1.5px; }
 
-/* 문서 */
-#document-canvas{
-  width:100%;
-  max-width:650px;
-  background:#fff;
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:0 20px 60px rgba(0,0,0,0.2);
-  position:relative;
-}
+    .data-table { width: 100%; border: 3px solid var(--table-border); background: rgba(255, 255, 255, 0.98); margin-bottom: 25px; }
+    .row { display: flex; border-bottom: 1.5px solid var(--table-border); min-height: var(--input-height); }
+    .row:last-child { border-bottom: none; }
 
-/* 상단 헤더 */
-.header{
-  background:linear-gradient(135deg,#0d2f52,#1e4f85);
-  color:#fff;
-  padding:30px;
-  text-align:center;
-  font-weight:900;
-  font-size:22px;
-  letter-spacing:2px;
-}
+    .label {
+      flex: 0 0 110px; background: var(--label-bg); color: var(--primary-navy); font-weight: 700; font-size: 15px;
+      display: flex; align-items: center; justify-content: center; border-right: 1.5px solid var(--table-border);
+    }
 
-/* 내용 */
-.content{
-  padding:40px;
-}
+    .input-box { flex: 1; padding: 0 15px; display: flex; align-items: center; min-height: var(--input-height); }
+    .input-box input, .input-box select, .fix-text {
+      width: 100%; border: none; background: transparent; font-size: 16px; outline: none; font-family: inherit;
+      color: #111; height: 100%; display: flex; align-items: center;
+    }
 
-.title{
-  font-size:28px;
-  font-weight:900;
-  color:var(--navy);
-  text-align:center;
-  margin-bottom:30px;
-}
+    .legal-notice { font-size: 13px; line-height: 1.7; color: #555; margin-bottom: 35px; word-break: keep-all; }
+    
+    /* ✅ 핵심 수정된 날짜 영역 */
+    .date-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      gap: 4px;
 
-/* 테이블 */
-.table{
-  border:2px solid var(--line);
-  border-radius:8px;
-  overflow:hidden;
-  margin-bottom:25px;
-}
+      margin-bottom: 35px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #222;
+    }
 
-.row{
-  display:flex;
-  border-bottom:1px solid #dbe2ea;
-}
+    .date-wrap select, .date-fix {
+      border: none;
+      border-bottom: 2px solid #333;
+      font-size: 18px;
+      font-weight: 800;
+      background: transparent;
+      padding: 0 5px;
+      text-align: center;
+      width: auto;
+      display: inline-block;
+    }
 
-.row:last-child{border-bottom:none;}
+    .footer-section { text-align: center; margin-bottom: 40px; }
+    .company-stamp { font-size: 20px; font-weight: 900; color: var(--primary-navy); margin-bottom: 15px; letter-spacing: -0.5px; }
+    
+    .resp-input-wrap { display: inline-flex; align-items: center; gap: 8px; border-bottom: 1.5px solid #333; width: 220px; padding-bottom: 4px; }
+    .resp-input-wrap input, .resp-fix { border: none; outline: none; font-size: 15px; width: 100%; font-weight: 700; text-align: center; background: transparent; }
 
-.label{
-  width:120px;
-  background:#f4f7fb;
-  font-weight:700;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--navy);
-}
-
-.input{
-  flex:1;
-  padding:12px;
-  display:flex;
-  align-items:center;
-}
-
-/* 입력 */
-input,select{
-  width:100%;
-  border:none;
-  border-bottom:2px solid #ccd5df;
-  font-size:15px;
-  padding:6px;
-  background:transparent;
-  outline:none;
-}
-
-input:focus,select:focus{
-  border-bottom:2px solid var(--navy);
-}
-
-/* select 커스텀 */
-select{
-  appearance:none;
-  background:url("data:image/svg+xml;utf8,<svg fill='%230d2f52' height='20' viewBox='0 0 24 24' width='20'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right;
-}
-
-/* 안내문 */
-.notice{
-  font-size:13px;
-  color:#555;
-  line-height:1.7;
-  margin-bottom:30px;
-}
-
-/* 날짜 */
-.date-wrap{
-  display:flex;
-  justify-content:center;
-  gap:6px;
-  font-weight:700;
-  margin-bottom:30px;
-}
-
-.date-wrap select{
-  width:auto;
-  text-align:center;
-}
-
-/* 하단 */
-.footer{
-  text-align:center;
-}
-
-.company{
-  font-weight:900;
-  color:var(--navy);
-  margin-bottom:15px;
-}
-
-.resp{
-  border-bottom:1px solid #333;
-  display:inline-flex;
-  gap:10px;
-  padding-bottom:5px;
-}
-
-.resp input{
-  border:none;
-  text-align:center;
-}
-
-/* 버튼 */
-.btn{
-  width:100%;
-  max-width:650px;
-  margin-top:20px;
-  padding:18px;
-  border:none;
-  border-radius:10px;
-  font-size:17px;
-  font-weight:800;
-  color:#fff;
-  background:linear-gradient(135deg,#c2410c,#ea580c);
-  cursor:pointer;
-  box-shadow:0 8px 20px rgba(0,0,0,0.2);
-  transition:0.2s;
-}
-
-.btn:hover{
-  transform:translateY(-2px);
-}
-</style>
+    .btn-save-container { width: 100%; max-width: 650px; margin: 20px auto; padding: 0 10px; }
+    .btn-save {
+      width: 100%; padding: 20px; background: #c2410c; color: white; border: none; font-size: 18px; font-weight: 800;
+      border-radius: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
-
 <body>
 
 <div id="document-canvas">
-  <div class="header">BLACKROCK INVESTMENT</div>
+  <div class="content-area">
+    <h1 class="doc-title">개인정보 수집 및 이용 동의서</h1>
 
-  <div class="content">
-    <div class="title">개인정보 수집 및 이용 동의서</div>
-
-    <div class="table">
-      <div class="row"><div class="label">성명</div><div class="input"><input></div></div>
-      <div class="row"><div class="label">연락처</div><div class="input"><input></div></div>
-
+    <div class="data-table">
+      <div class="row"><div class="label">성 명</div><div class="input-box"><input type="text" placeholder="성함"></div></div>
+      <div class="row"><div class="label">연 락 처</div><div class="input-box"><input type="tel" placeholder="010-0000-0000"></div></div>
       <div class="row">
-        <div class="label">거주지</div>
-        <div class="input">
+        <div class="label">거 주 지</div>
+        <div class="input-box">
           <select>
-            <option>지역 선택</option>
-            <option>서울특별시</option>
-            <option>부산광역시</option>
-            <option>대구광역시</option>
-            <option>인천광역시</option>
-            <option>광주광역시</option>
-            <option>대전광역시</option>
-            <option>울산광역시</option>
-            <option>세종특별자치시</option>
-            <option>경기도</option>
-            <option>강원특별자치도</option>
-            <option>충청북도</option>
-            <option>충청남도</option>
-            <option>전라북도</option>
-            <option>전라남도</option>
-            <option>경상북도</option>
-            <option>경상남도</option>
-            <option>제주특별자치도</option>
-          </select>
+  <option value="">지역 선택</option>
+
+  <!-- 특별/광역시 -->
+  <option>서울특별시</option>
+  <option>부산광역시</option>
+  <option>대구광역시</option>
+  <option>인천광역시</option>
+  <option>광주광역시</option>
+  <option>대전광역시</option>
+  <option>울산광역시</option>
+  <option>세종특별자치시</option>
+
+  <!-- 도 -->
+  <option>경기도</option>
+  <option>강원특별자치도</option>
+  <option>충청북도</option>
+  <option>충청남도</option>
+  <option>전라북도</option>
+  <option>전라남도</option>
+  <option>경상북도</option>
+  <option>경상남도</option>
+  <option>제주특별자치도</option>
+</select>
         </div>
       </div>
-
-      <div class="row"><div class="label">투자기간</div><div class="input"><select><option>선택</option><option>1년 미만</option><option>1~3년</option><option>3~5년</option></select></div></div>
-      <div class="row"><div class="label">투자금액</div><div class="input"><select><option>선택</option><option>1천만원</option><option>5천만원</option><option>1억원</option></select></div></div>
-      <div class="row"><div class="label">보유종목</div><div class="input"><input></div></div>
-      <div class="row"><div class="label">수익현황</div><div class="input"><input></div></div>
+      <div class="row"><div class="label">투자기간</div><div class="input-box"><select><option value="">선택</option><option>1년 미만</option><option>1년~3년</option><option>3년~5년</option><option>5년 이상</option></select></div></div>
+      <div class="row"><div class="label">투자금액</div><div class="input-box"><select><option value="">선택</option><option>1천만원 이하</option><option>5천만원 이하</option><option>1억원 이하</option><option>1억원 이상</option></select></div></div>
+      <div class="row"><div class="label">보유종목</div><div class="input-box"><input type="text" placeholder="예: 삼성전자"></div></div>
+      <div class="row"><div class="label">수익현황</div><div class="input-box"><input type="text" placeholder="예: 수익중"></div></div>
     </div>
 
-    <div class="notice">
-      본 동의서는 개인정보 보호법에 따라 고객의 정보를 보호하며 투자 분석 자료로 활용됩니다.
+    <div class="legal-notice">
+      블랙록자산운용은 개인정보 보호법 제30조에 따라 정보 주체(고객)의 개인정보 및 권익을 보호하고, 
+        본 동의서를 통해 수집된 개인정보는 블랙록의 개인별 맞춤 투자 플랜에 참고 자료로 등록됨을 안내 드립니다.
     </div>
 
     <div class="date-wrap">
       2026년 <select id="m"></select>월 <select id="d"></select>일
     </div>
 
-    <div class="footer">
-      <div class="company">블랙록자산운용주식회사</div>
-      <div class="resp">
-        작성책임자 <input>
+    <div class="footer-section">
+      <div class="company-stamp">블랙록자산운용주식회사 (비상장)</div>
+      <div class="resp-input-wrap">
+        <span style="font-size:14px; color:#444;">작성책임자:</span>
+        <input type="text" placeholder="담당자 성함">
       </div>
     </div>
   </div>
 </div>
 
-<button class="btn" onclick="save()">이미지 저장</button>
+<div class="btn-save-container">
+  <button type="button" class="btn-save" onclick="saveAsImage()">동의서 이미지 저장 </button>
+</div>
 
 <script>
-const m=document.getElementById('m');
-const d=document.getElementById('d');
-const now=new Date();
-
-for(let i=1;i<=12;i++){
-  let o=new Option(i,i);
-  if(i===now.getMonth()+1)o.selected=true;
-  m.appendChild(o);
-}
-
-function update(){
-  d.innerHTML="";
-  let last=new Date(2026,m.value,0).getDate();
-  for(let i=1;i<=last;i++){
-    let o=new Option(i,i);
-    if(i===now.getDate())o.selected=true;
-    d.appendChild(o);
+  const ms = document.getElementById('m'), ds = document.getElementById('d'), now = new Date();
+  for(let i=1; i<=12; i++) {
+    let o = document.createElement('option'); o.value=i; o.text=i;
+    if(i===now.getMonth()+1) o.selected=true; ms.appendChild(o);
   }
-}
-m.onchange=update;
-update();
+  function updateDays() {
+    ds.innerHTML=""; const last = new Date(2026, ms.value, 0).getDate();
+    for(let i=1; i<=last; i++) {
+      let o = document.createElement('option'); o.value=i; o.text=i;
+      if(i===now.getDate()) o.selected=true; ds.appendChild(o);
+    }
+  }
+  ms.onchange = updateDays; updateDays();
 
-function save(){
-  html2canvas(document.getElementById("document-canvas"),{scale:2})
-  .then(canvas=>{
-    let a=document.createElement("a");
-    a.href=canvas.toDataURL("image/jpeg",0.95);
-    a.download="동의서.jpg";
-    a.click();
-  });
-}
+  async function saveAsImage() {
+    const canvasArea = document.getElementById('document-canvas');
+    const allInputs = canvasArea.querySelectorAll('input, select');
+    const records = [];
+
+    allInputs.forEach(el => {
+      const val = el.value || "";
+      const isDate = el.parentElement.classList.contains('date-wrap');
+      const isResp = el.parentElement.classList.contains('resp-input-wrap');
+      
+      const span = document.createElement('span');
+      if(isDate) span.className = 'date-fix';
+      else if(isResp) span.className = 'resp-fix';
+      else span.className = 'fix-text';
+      
+      span.innerText = val;
+      el.style.display = 'none';
+      el.parentNode.insertBefore(span, el);
+      records.push({ el, span });
+    });
+
+    setTimeout(() => {
+      html2canvas(canvasArea, { 
+        scale: 2, 
+        useCORS: true, 
+        backgroundColor: "#ffffff"
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = '블랙록_동의서_' + new Date().getTime() + '.jpg';
+        link.href = canvas.toDataURL('image/jpeg', 0.95);
+        link.click();
+
+        records.forEach(item => {
+          item.span.remove();
+          item.el.style.display = '';
+        });
+      });
+    }, 50);
+  }
 </script>
-
 </body>
 </html>
