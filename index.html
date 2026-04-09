@@ -4,187 +4,274 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>블랙록 개인정보 동의서 | BlackRock</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --navy-dark: #1e3a5f;
-      --blue-primary: #4a9fd8;
-      --blue-light: #7dc0e8;
-      --bg-white: #ffffff;
-      --bg-light: #f5f7fa;
-      --border-color: #1e3a5f;
-      --text-main: #2c3e50;
-      --text-muted: #6b7280;
+      --navy-primary: #0d2f52;
+      --navy-dark: #082441;
+      --blue-medium: #2c5f8d;
+      --blue-bright: #4a9fd8;
+      --blue-sky: #5dbedc;
+      --blue-light: #a8dce8;
+      --gray-bg: #e8ecef;
+      --gray-light: #dfe4e8;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
 
     body {
       font-family: 'Noto Sans KR', 'Inter', sans-serif;
-      background: #e8eef3;
-      color: var(--text-main);
+      background: #f0f3f5;
+      color: #1a1a1a;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 40px 20px;
+      -webkit-font-smoothing: antialiased;
     }
 
     .document-container {
       width: 100%;
-      max-width: 850px;
-      background: var(--bg-white);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      background: white;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.12);
       position: relative;
     }
 
-    /* 상단 기하학적 헤더 */
-    .geometric-header {
+    /* ============================================
+       상단 기하학 패턴 (원본 완벽 재현)
+    ============================================ */
+    .top-geometric {
       position: relative;
       height: 180px;
       overflow: hidden;
-      background: linear-gradient(135deg, #1e3a5f 0%, #2b5a8f 30%, #4a9fd8 60%, #7dc0e8 100%);
-    }
-
-    /* 기하학적 패턴 */
-    .geometric-header::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -10%;
-      width: 120%;
-      height: 200%;
-      background: 
-        linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.03) 30%, rgba(255,255,255,0.03) 50%, transparent 50%),
-        linear-gradient(-45deg, transparent 30%, rgba(255,255,255,0.05) 30%, rgba(255,255,255,0.05) 50%, transparent 50%);
-      background-size: 60px 60px;
-    }
-
-    /* 대각선 화이트 라인 */
-    .geometric-header::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      right: -5%;
-      width: 50%;
-      height: 3px;
-      background: rgba(255,255,255,0.9);
-      transform: rotate(-25deg);
-      box-shadow: 0 -8px 0 rgba(255,255,255,0.3);
-    }
-
-    .logo-container {
-      position: absolute;
-      top: 50%;
-      right: 40px;
-      transform: translateY(-50%);
-      z-index: 10;
-    }
-
-    .logo-text {
-      font-size: 42px;
-      font-weight: 400;
-      color: white;
-      letter-spacing: -0.5px;
-      font-family: 'Inter', sans-serif;
-    }
-
-    /* 메인 컨텐츠 영역 */
-    .content-area {
-      padding: 50px 60px 60px;
-    }
-
-    .main-title {
-      font-size: 38px;
-      font-weight: 900;
-      color: var(--navy-dark);
-      margin-bottom: 50px;
-      letter-spacing: 2px;
-    }
-
-    /* 폼 박스 (테두리 스타일) */
-    .form-box {
-      border: 2px solid var(--border-color);
-      padding: 0;
-      margin-bottom: 40px;
-    }
-
-    .form-row {
-      display: flex;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .form-row:last-child {
-      border-bottom: none;
-    }
-
-    .form-label {
-      flex: 0 0 180px;
-      background: var(--bg-light);
-      padding: 18px 24px;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text-main);
-      border-right: 1px solid var(--border-color);
-      display: flex;
-      align-items: center;
-      letter-spacing: 3px;
-    }
-
-    .form-input {
-      flex: 1;
-      padding: 18px 24px;
       background: white;
     }
 
-    .form-input input,
-    .form-input select {
+    /* 좌측 다크 네이비 삼각형 */
+    .left-navy-triangle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 180px 0 0 220px;
+      border-color: transparent transparent transparent var(--navy-dark);
+      z-index: 1;
+    }
+
+    /* 좌측 상단 작은 화이트 삼각형 */
+    .left-white-accent {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 70px 0 0 70px;
+      border-color: transparent transparent transparent #ffffff;
+      z-index: 2;
+    }
+
+    /* 중앙 블루 그래디언트 파형 */
+    .center-wave {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(120deg, 
+        var(--navy-primary) 0%, 
+        var(--navy-primary) 15%,
+        var(--blue-medium) 30%,
+        var(--blue-bright) 50%,
+        var(--blue-sky) 70%,
+        var(--blue-light) 100%
+      );
+      clip-path: polygon(
+        15% 0%, 
+        100% 0%, 
+        100% 50%, 
+        80% 100%, 
+        15% 100%
+      );
+      z-index: 0;
+    }
+
+    /* 대각선 화이트 라인 */
+    .diagonal-white-line {
+      position: absolute;
+      top: 50%;
+      right: 5%;
+      width: 48%;
+      height: 3px;
+      background: white;
+      transform: translateY(-50%) rotate(-22deg);
+      transform-origin: center;
+      z-index: 3;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* 대각선 보조 라인 (더 얇고 투명) */
+    .diagonal-accent-1 {
+      position: absolute;
+      top: 40%;
+      right: 8%;
+      width: 40%;
+      height: 1.5px;
+      background: rgba(255,255,255,0.4);
+      transform: translateY(-50%) rotate(-22deg);
+      z-index: 2;
+    }
+
+    .diagonal-accent-2 {
+      position: absolute;
+      top: 60%;
+      right: 3%;
+      width: 35%;
+      height: 1.5px;
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-50%) rotate(-22deg);
+      z-index: 2;
+    }
+
+    /* BlackRock 로고 영역 */
+    .logo-area {
+      position: absolute;
+      top: 50%;
+      right: 50px;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: var(--blue-sky);
+      padding: 12px 28px;
+      clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+
+    .logo-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 44px;
+      font-weight: 400;
+      color: white;
+      letter-spacing: -0.5px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    /* ============================================
+       메인 컨텐츠
+    ============================================ */
+    .document-body {
+      padding: 60px 65px 70px;
+      background: white;
+    }
+
+    .main-title {
+      font-size: 44px;
+      font-weight: 900;
+      color: var(--navy-primary);
+      margin-bottom: 50px;
+      letter-spacing: 3px;
+    }
+
+    /* ============================================
+       폼 테이블 (원본 스타일 완벽 재현)
+    ============================================ */
+    .info-table {
+      border: 3px solid var(--navy-primary);
+      margin-bottom: 45px;
+    }
+
+    .table-row {
+      display: flex;
+      border-bottom: 1.5px solid var(--navy-primary);
+      min-height: 60px;
+    }
+
+    .table-row:last-child {
+      border-bottom: none;
+    }
+
+    .cell-label {
+      flex: 0 0 200px;
+      background: var(--gray-bg);
+      padding: 20px 28px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #2c3e50;
+      border-right: 1.5px solid var(--navy-primary);
+      display: flex;
+      align-items: center;
+      letter-spacing: 6px;
+    }
+
+    .cell-input {
+      flex: 1;
+      padding: 20px 28px;
+      background: white;
+      display: flex;
+      align-items: center;
+    }
+
+    .cell-input input,
+    .cell-input select {
       width: 100%;
       border: none;
       background: transparent;
-      font-size: 15px;
-      color: var(--text-main);
+      font-size: 16px;
+      color: #1a1a1a;
       font-family: 'Noto Sans KR', sans-serif;
       outline: none;
+      font-weight: 400;
     }
 
-    .form-input select {
+    .cell-input select {
       appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%232c3e50'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230d2f52' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 10px center;
-      background-size: 16px;
-      padding-right: 35px;
+      background-size: 18px;
+      padding-right: 40px;
       cursor: pointer;
+      font-weight: 500;
     }
 
-    .form-input input::placeholder {
-      color: #cbd5e0;
+    .cell-input input::placeholder {
+      color: #bbb;
+      font-weight: 300;
     }
 
-    /* 법률 안내 박스 */
+    /* ============================================
+       법률 안내 박스
+    ============================================ */
     .legal-notice {
-      background: var(--bg-light);
-      padding: 28px 32px;
-      font-size: 14.5px;
+      background: white;
+      padding: 30px 0;
+      font-size: 15px;
       line-height: 2;
-      color: var(--text-main);
+      color: #333;
       margin-bottom: 50px;
-      border-left: 4px solid var(--navy-dark);
+      text-align: left;
     }
 
-    /* 날짜 영역 */
-    .date-area {
+    /* ============================================
+       날짜 입력
+    ============================================ */
+    .date-input {
       text-align: center;
       margin-bottom: 60px;
       font-size: 20px;
       font-weight: 500;
-      color: var(--text-main);
+      color: #1a1a1a;
     }
 
-    .date-area select {
+    .date-input select {
       border: none;
-      border-bottom: 2px solid var(--navy-dark);
+      border-bottom: 2px solid #333;
       background: transparent;
       font-size: 20px;
       font-weight: 600;
@@ -195,66 +282,142 @@
       outline: none;
     }
 
-    /* 하단 서명 영역 */
-    .signature-area {
+    /* ============================================
+       서명 영역
+    ============================================ */
+    .signature-block {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 50px;
     }
 
-    .company-name {
+    .company-name-text {
       font-size: 24px;
       font-weight: 700;
-      color: var(--navy-dark);
+      color: var(--navy-primary);
       margin-bottom: 20px;
       letter-spacing: 1px;
     }
 
-    .signature-label {
+    .signature-label-text {
       font-size: 15px;
-      color: var(--text-muted);
+      color: #555;
       font-weight: 500;
+      text-align: left;
     }
 
+    /* ============================================
+       하단 기하학 패턴 (우측 하단)
+    ============================================ */
+    .bottom-geometric {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 300px;
+      height: 150px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    /* 우측 하단 블루 그래디언트 */
+    .bottom-blue-shape {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 0 150px 300px;
+      border-color: transparent transparent var(--blue-bright) transparent;
+      background: linear-gradient(135deg, var(--blue-sky), var(--blue-bright));
+    }
+
+    /* 우측 하단 네이비 삼각형 */
+    .bottom-navy-accent {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 0 150px 200px;
+      border-color: transparent transparent var(--navy-dark) transparent;
+    }
+
+    /* 하단 점 패턴 장식 */
+    .bottom-dots {
+      position: absolute;
+      bottom: 20px;
+      right: 30px;
+      width: 120px;
+      height: 80px;
+      background-image: 
+        radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px);
+      background-size: 8px 8px;
+      z-index: 1;
+    }
+
+    /* ============================================
+       제출 버튼
+    ============================================ */
     .submit-btn {
       width: 100%;
-      background: var(--navy-dark);
+      background: var(--navy-primary);
       color: white;
       border: none;
-      padding: 20px;
+      padding: 22px;
       font-size: 18px;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.3s;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+      font-family: 'Noto Sans KR', sans-serif;
+      margin-bottom: 0;
     }
 
     .submit-btn:hover {
-      background: #2b5a8f;
+      background: var(--navy-dark);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(30, 58, 95, 0.3);
+      box-shadow: 0 6px 20px rgba(13, 47, 82, 0.3);
     }
 
-    /* 반응형 */
+    /* ============================================
+       반응형
+    ============================================ */
     @media (max-width: 768px) {
-      .content-area {
-        padding: 30px 25px;
+      .document-body {
+        padding: 40px 30px;
       }
-      
-      .form-row {
+
+      .main-title {
+        font-size: 32px;
+        letter-spacing: 1px;
+      }
+
+      .table-row {
         flex-direction: column;
       }
-      
-      .form-label {
+
+      .cell-label {
         border-right: none;
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1.5px solid var(--navy-primary);
       }
-      
-      .main-title {
-        font-size: 28px;
+
+      .logo-area {
+        right: 20px;
+        padding: 10px 20px;
       }
 
       .logo-text {
         font-size: 32px;
+      }
+
+      .date-input {
+        font-size: 18px;
+      }
+
+      .bottom-geometric {
+        width: 200px;
+        height: 100px;
       }
     }
   </style>
@@ -262,30 +425,37 @@
 <body>
 
   <div class="document-container">
-    <!-- 기하학적 상단 헤더 -->
-    <div class="geometric-header">
-      <div class="logo-container">
+    <!-- 상단 기하학 패턴 -->
+    <div class="top-geometric">
+      <div class="left-navy-triangle"></div>
+      <div class="left-white-accent"></div>
+      <div class="center-wave"></div>
+      <div class="diagonal-white-line"></div>
+      <div class="diagonal-accent-1"></div>
+      <div class="diagonal-accent-2"></div>
+      
+      <div class="logo-area">
         <div class="logo-text">BlackRock</div>
       </div>
     </div>
 
-    <!-- 메인 컨텐츠 -->
-    <div class="content-area">
+    <!-- 메인 문서 내용 -->
+    <div class="document-body">
       <h1 class="main-title">블랙록 개인정보 동의서</h1>
 
-      <form id="agreementForm">
-        <!-- 폼 테이블 -->
-        <div class="form-box">
-          <div class="form-row">
-            <div class="form-label">성 명 :</div>
-            <div class="form-input">
-              <input type="text" placeholder="" required>
+      <form id="consentForm">
+        <!-- 정보 입력 테이블 -->
+        <div class="info-table">
+          <div class="table-row">
+            <div class="cell-label">성 명 :</div>
+            <div class="cell-input">
+              <input type="text" required>
             </div>
           </div>
 
-          <div class="form-row">
-            <div class="form-label">나 이 :</div>
-            <div class="form-input">
+          <div class="table-row">
+            <div class="cell-label">나 이 :</div>
+            <div class="cell-input">
               <select required>
                 <option value="">선택하세요</option>
                 <option value="20-30">20~30대</option>
@@ -295,9 +465,9 @@
             </div>
           </div>
 
-          <div class="form-row">
-            <div class="form-label">성 별 :</div>
-            <div class="form-input">
+          <div class="table-row">
+            <div class="cell-label">성 별 :</div>
+            <div class="cell-input">
               <select required>
                 <option value="">선택하세요</option>
                 <option value="남성">남성</option>
@@ -306,9 +476,9 @@
             </div>
           </div>
 
-          <div class="form-row">
-            <div class="form-label">거 주 지 :</div>
-            <div class="form-input">
+          <div class="table-row">
+            <div class="cell-label">거 주 지 :</div>
+            <div class="cell-input">
               <select required>
                 <option value="">선택하세요</option>
                 <option value="서울특별시">서울특별시</option>
@@ -332,9 +502,9 @@
             </div>
           </div>
 
-          <div class="form-row">
-            <div class="form-label">투 자 기 간 :</div>
-            <div class="form-input">
+          <div class="table-row">
+            <div class="cell-label">투 자 기 간 :</div>
+            <div class="cell-input">
               <select required>
                 <option value="">선택하세요</option>
                 <option value="1년이하">1년 이하</option>
@@ -344,9 +514,9 @@
             </div>
           </div>
 
-          <div class="form-row">
-            <div class="form-label">투 자 금 :</div>
-            <div class="form-input">
+          <div class="table-row">
+            <div class="cell-label">투 자 금 :</div>
+            <div class="cell-input">
               <select required>
                 <option value="">선택하세요</option>
                 <option value="2천만원이하">2천만원 이하</option>
@@ -357,16 +527,16 @@
             </div>
           </div>
 
-          <div class="form-row">
-            <div class="form-label">보 유 종 목 :</div>
-            <div class="form-input">
-              <input type="text" placeholder="주요 보유 종목을 적어주세요 (예: 삼성전자, NAVER)">
+          <div class="table-row">
+            <div class="cell-label">보 유 종 목 :</div>
+            <div class="cell-input">
+              <input type="text" placeholder="">
             </div>
           </div>
 
-          <div class="form-row">
-            <div class="form-label">수 익 현 황 :</div>
-            <div class="form-input">
+          <div class="table-row">
+            <div class="cell-label">수 익 현 황 :</div>
+            <div class="cell-input">
               <input type="text" placeholder="">
             </div>
           </div>
@@ -378,8 +548,8 @@
           본 방침은 관련 법령의 제·개정 및 회사의 운용방침에 따라 변경될 수 있으며, 변경시 개인매니저 및 블랙록 플랫폼 내부에서 확인 가능 합니다.
         </div>
 
-        <!-- 날짜 선택 -->
-        <div class="date-area">
+        <!-- 날짜 입력 -->
+        <div class="date-input">
           <span>2026년</span>
           <select id="monthSelect"></select>
           <span>월</span>
@@ -388,24 +558,32 @@
         </div>
 
         <!-- 서명 영역 -->
-        <div class="signature-area">
-          <div class="company-name">블랙록자산운용주식회사 (비상장)</div>
-          <div class="signature-label">작성책임자:</div>
+        <div class="signature-block">
+          <div class="company-name-text">블랙록자산운용주식회사 (비상장)</div>
+          <div class="signature-label-text">작성책임자:</div>
         </div>
 
         <!-- 제출 버튼 -->
         <button type="submit" class="submit-btn">내용 확인 및 동의 완료</button>
       </form>
     </div>
+
+    <!-- 하단 기하학 패턴 -->
+    <div class="bottom-geometric">
+      <div class="bottom-navy-accent"></div>
+      <div class="bottom-blue-shape"></div>
+      <div class="bottom-dots"></div>
+    </div>
   </div>
 
 <script>
+  // 날짜 선택기
   const monthSelect = document.getElementById('monthSelect');
   const daySelect = document.getElementById('daySelect');
   const now = new Date();
 
   for (let m = 1; m <= 12; m++) {
-    let opt = document.createElement('option');
+    const opt = document.createElement('option');
     opt.value = m;
     opt.textContent = m;
     if (m === now.getMonth() + 1) opt.selected = true;
@@ -419,21 +597,21 @@
     const lastDay = new Date(year, month, 0).getDate();
 
     for (let d = 1; d <= lastDay; d++) {
-      let opt = document.createElement('option');
+      const opt = document.createElement('option');
       opt.value = d;
       opt.textContent = d;
       if (d === now.getDate() && month == now.getMonth() + 1) opt.selected = true;
       daySelect.appendChild(opt);
     }
   }
-  
+
   monthSelect.addEventListener('change', updateDays);
   updateDays();
 
-  document.getElementById('agreementForm').onsubmit = function(e) {
+  document.getElementById('consentForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    alert('동의가 정상적으로 완료되었습니다.\n감사합니다.');
-  };
+    alert('✓ 동의가 정상적으로 완료되었습니다.\n\n감사합니다.');
+  });
 </script>
 </body>
 </html>
