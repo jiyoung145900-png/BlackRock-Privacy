@@ -43,9 +43,9 @@
 
     .legal-notice { font-size: 13px; line-height: 1.7; color: #555; margin-bottom: 35px; word-break: keep-all; }
     
-    /* 날짜 영역 고정 */
+    /* 날짜 영역 레이아웃 유지 */
     .date-wrap { text-align: center; margin-bottom: 35px; font-size: 18px; font-weight: 700; color: #222; }
-    .date-wrap select, .date-fix { border: none; border-bottom: 2px solid #333; font-size: 18px; font-weight: 800; background: transparent; margin: 0 4px; padding: 0 5px; text-align: center; }
+    .date-wrap select, .date-fix { border: none; border-bottom: 2px solid #333; font-size: 18px; font-weight: 800; background: transparent; margin: 0 4px; padding: 0 5px; text-align: center; display: inline-block; vertical-align: middle; }
 
     .footer-section { text-align: center; margin-bottom: 40px; }
     .company-stamp { font-size: 20px; font-weight: 900; color: var(--primary-navy); margin-bottom: 15px; letter-spacing: -0.5px; }
@@ -67,41 +67,26 @@
     <h1 class="doc-title">개인정보 수집 및 이용 동의서</h1>
 
     <div class="data-table">
-      <div class="row"><div class="label">성 명</div><div class="input-box"><input type="text" placeholder="성함 입력"></div></div>
+      <div class="row"><div class="label">성 명</div><div class="input-box"><input type="text" placeholder="성함"></div></div>
       <div class="row"><div class="label">연 락 처</div><div class="input-box"><input type="tel" placeholder="010-0000-0000"></div></div>
-      <div class="row">
-        <div class="label">나 이 / 성별</div>
-        <div class="input-box">
-          <select style="width:50%"><option value="">나이 선택</option><option>20대</option><option>30대</option><option>40대</option><option>50대</option><option>60대 이상</option></select>
-          <select style="width:50%"><option value="">성별</option><option>남성</option><option>여성</option></select>
-        </div>
-      </div>
       <div class="row">
         <div class="label">거 주 지</div>
         <div class="input-box">
           <select>
-            <option value="">거주 지역(도 단위) 선택</option>
-            <option>서울특별시</option><option>경기도</option><option>인천광역시</option><option>강원특별자치도</option>
-            <option>충청북도</option><option>충청남도</option><option>대전광역시</option><option>세종특별자치시</option>
-            <option>전라북도</option><option>전라남도</option><option>광주광역시</option><option>경상북도</option>
-            <option>경상남도</option><option>부산광역시</option><option>대구광역시</option><option>울산광역시</option><option>제주특별자치도</option>
+            <option value="">지역(도 단위) 선택</option>
+            <option>서울특별시</option><option>경기도</option><option>인천광역시</option><option>강원도</option>
+            <option>충청도</option><option>전라도</option><option>경상도</option><option>제주도</option>
           </select>
         </div>
       </div>
-      <div class="row">
-        <div class="label">투자기간</div>
-        <div class="input-box"><select><option value="">선택</option><option>1년 미만</option><option>1년~3년</option><option>3년~5년</option><option>5년 이상</option></select></div>
-      </div>
-      <div class="row">
-        <div class="label">투자금액</div>
-        <div class="input-box"><select><option value="">선택</option><option>1천만원 이하</option><option>5천만원 이하</option><option>1억원 이하</option><option>1억원 이상</option></select></div>
-      </div>
-      <div class="row"><div class="label">보유종목</div><div class="input-box"><input type="text" placeholder="예: 삼성전자, 비트코인"></div></div>
-      <div class="row"><div class="label">수익현황</div><div class="input-box"><input type="text" placeholder="예: 수익중(+10%)"></div></div>
+      <div class="row"><div class="label">투자기간</div><div class="input-box"><select><option value="">선택</option><option>1년 미만</option><option>1년~3년</option><option>3년~5년</option><option>5년 이상</option></select></div></div>
+      <div class="row"><div class="label">투자금액</div><div class="input-box"><select><option value="">선택</option><option>1천만원 이하</option><option>5천만원 이하</option><option>1억원 이하</option><option>1억원 이상</option></select></div></div>
+      <div class="row"><div class="label">보유종목</div><div class="input-box"><input type="text" placeholder="예: 삼성전자"></div></div>
+      <div class="row"><div class="label">수익현황</div><div class="input-box"><input type="text" placeholder="예: 수익중"></div></div>
     </div>
 
     <div class="legal-notice">
-      본인은 블랙록자산운용이 제공하는 서비스 이용을 위해 개인정보보호법에 의거하여 위와 같이 개인정보를 수집 및 이용하는 것에 동의합니다. 수집된 정보는 목적 외 용도로 사용되지 않습니다.
+      블랙록자산운용은 관련 법령에 따라 고객의 개인정보를 안전하게 보호하며, 본 동의서는 투자 플랜 참고 자료로만 활용됩니다.
     </div>
 
     <div class="date-wrap">
@@ -112,18 +97,18 @@
       <div class="company-stamp">블랙록자산운용주식회사 (비상장)</div>
       <div class="resp-input-wrap">
         <span style="font-size:14px; color:#444;">작성책임자:</span>
-        <input type="text" placeholder="성함 입력">
+        <input type="text" placeholder="담당자 성함">
       </div>
     </div>
   </div>
 </div>
 
 <div class="btn-save-container">
-  <button type="button" class="btn-save" onclick="saveAsImage()">동의서 이미지 저장 (오류 해결판)</button>
+  <button type="button" class="btn-save" onclick="saveAsImage()">동의서 이미지 저장 (날짜 고정판)</button>
 </div>
 
 <script>
-  // 날짜 초기화
+  // 날짜 초기화 로직
   const ms = document.getElementById('m'), ds = document.getElementById('d'), now = new Date();
   for(let i=1; i<=12; i++) {
     let o = document.createElement('option'); o.value=i; o.text=i;
@@ -138,37 +123,35 @@
   }
   ms.onchange = updateDays; updateDays();
 
-  // 📸 이미지 저장 핵심 (전환 -> 캡처 -> 복구)
+  // 📸 저장 함수
   async function saveAsImage() {
     const canvasArea = document.getElementById('document-canvas');
     const allInputs = canvasArea.querySelectorAll('input, select');
     const records = [];
 
-    // 1. 캡처 전: 모든 입력창을 글자로 박아버리기
+    // 1. 캡처 전: 모든 입력창을 글자로 임시 교체
     allInputs.forEach(el => {
       const val = el.value || "";
       const isDate = el.parentElement.classList.contains('date-wrap');
       const isResp = el.parentElement.classList.contains('resp-input-wrap');
       
       const span = document.createElement('span');
-      // 스타일 클래스 적용
       if(isDate) span.className = 'date-fix';
       else if(isResp) span.className = 'resp-fix';
       else span.className = 'fix-text';
       
       span.innerText = val;
-      el.style.display = 'none';
+      el.style.display = 'none'; // 기존창 숨김
       el.parentNode.insertBefore(span, el);
       records.push({ el, span });
     });
 
-    // 2. 캡처 (지연 시간 0.1초 줘서 렌더링 안정화)
+    // 2. 캡처 실행
     setTimeout(() => {
       html2canvas(canvasArea, { 
         scale: 2, 
         useCORS: true, 
-        backgroundColor: "#ffffff",
-        logging: false
+        backgroundColor: "#ffffff"
       }).then(canvas => {
         const link = document.createElement('a');
         link.download = '블랙록_동의서_' + new Date().getTime() + '.jpg';
@@ -181,7 +164,7 @@
           item.el.style.display = '';
         });
       });
-    }, 100);
+    }, 50);
   }
 </script>
 </body>
