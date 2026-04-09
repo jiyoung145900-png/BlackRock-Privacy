@@ -7,97 +7,95 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --br-navy: #0d2f52;
-      --br-border: #0d2f52;
-      --br-bg-light: rgba(240, 243, 246, 0.8);
+      --navy: #0d2f52;
+      --border-color: #0d2f52;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
     
     body {
-      background-color: #f0f0f0;
+      background-color: #f5f5f5;
       font-family: 'Noto Sans KR', sans-serif;
       display: flex;
       justify-content: center;
-      min-height: 100vh;
     }
 
-    /* 전체 컨테이너: 배경 이미지를 여기에 넣으세요 */
-    .doc-container {
+    /* 배경 이미지를 넣으실 컨테이너 */
+    .doc-page {
       width: 100%;
-      max-width: 700px;
+      max-width: 650px;
+      min-height: 100vh;
       background-color: #fff;
       position: relative;
-      /* 업로드하신 배경 이미지 경로를 지정하세요 */
-      background-image: url('your_background_image.jpg'); 
+      /* 여기에 이미지를 넣으시면 됩니다 */
+      background-image: url('be.png'); 
       background-size: 100% auto;
       background-position: top center;
       background-repeat: no-repeat;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
 
-    /* 이미지와 폼이 겹치지 않게 조절하는 여백 */
-    .content-overlay {
-      padding: 220px 40px 60px; /* 상단 로고/패턴 높이에 맞춰 조절 */
+    /* 본문 영역: 이미지 높이에 따라 padding-top을 조절하세요 */
+    .form-content {
+      padding: 210px 30px 50px; 
     }
 
-    .doc-title {
-      font-size: 32px;
+    .main-title {
+      font-size: 30px;
       font-weight: 900;
-      color: var(--br-navy);
+      color: var(--navy);
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 35px;
       letter-spacing: -1px;
     }
 
-    /* 테이블 구조 복구 */
-    .data-table {
+    /* 테이블 스타일 */
+    .info-table {
       width: 100%;
-      border: 2.5px solid var(--br-border);
+      border: 2.5px solid var(--border-color);
       background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(3px);
       margin-bottom: 30px;
     }
 
-    .row {
+    .info-row {
       display: flex;
-      border-bottom: 1.5px solid var(--br-border);
+      border-bottom: 1.5px solid var(--border-color);
       min-height: 55px;
     }
 
-    .row:last-child { border-bottom: none; }
+    .info-row:last-child { border-bottom: none; }
 
     .label {
-      flex: 0 0 110px;
-      background: var(--br-bg-light);
-      color: var(--br-navy);
+      flex: 0 0 100px;
+      background: #f0f3f6;
+      color: var(--navy);
       font-weight: 700;
-      font-size: 15px;
+      font-size: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-right: 1.5px solid var(--br-border);
+      border-right: 1.5px solid var(--border-color);
       text-align: center;
     }
 
-    .input-field {
+    .input-box {
       flex: 1;
       padding: 10px 15px;
       display: flex;
       align-items: center;
     }
 
-    .input-field input, .input-field select {
+    .input-box input, .input-box select {
       width: 100%;
       border: none;
       background: transparent;
       font-size: 16px;
       outline: none;
       font-family: inherit;
+      color: #333;
     }
 
-    /* 법률 안내 문구 */
-    .legal-box {
+    /* 안내 문구 */
+    .legal-notice {
       font-size: 14px;
       line-height: 1.8;
       color: #333;
@@ -105,152 +103,166 @@
       word-break: keep-all;
     }
 
-    /* 날짜/서명 섹션 */
-    .date-selection {
+    /* 날짜 선택 */
+    .date-wrap {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 35px;
       font-size: 18px;
     }
 
-    .date-selection select {
+    .date-wrap select {
       border: none;
       border-bottom: 2px solid #333;
       font-weight: 700;
       font-size: 18px;
       margin: 0 5px;
-    }
-
-    .signature-area {
       text-align: center;
-      margin-bottom: 40px;
     }
 
-    .comp-name {
-      font-size: 20px;
+    /* 하단 서명 */
+    .signature-section {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .company-title {
+      font-size: 19px;
       font-weight: 800;
-      color: var(--br-navy);
+      color: var(--navy);
       margin-bottom: 15px;
     }
 
-    .resp-line {
+    .manager-field {
       display: inline-block;
       width: 220px;
       text-align: left;
       border-bottom: 1px solid #000;
       font-size: 15px;
       padding-bottom: 5px;
+      color: #555;
     }
 
-    /* 제출 버튼 */
-    .submit-button {
+    /* 버튼 */
+    .submit-btn {
       width: 100%;
       padding: 22px;
-      background: var(--br-navy);
+      background: var(--navy);
       color: white;
       border: none;
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 700;
+      border-radius: 6px;
       cursor: pointer;
-      border-radius: 8px;
-      transition: 0.3s;
     }
 
-    .submit-button:active { transform: scale(0.98); opacity: 0.9; }
-
-    /* 모바일 반응형 */
-    @media (max-width: 600px) {
-      .content-overlay { padding: 180px 20px 40px; }
-      .doc-title { font-size: 26px; }
-      .label { flex: 0 0 90px; font-size: 14px; }
+    @media (max-width: 480px) {
+      .form-content { padding-top: 170px; padding-left: 20px; padding-right: 20px; }
+      .main-title { font-size: 24px; }
+      .label { flex: 0 0 85px; font-size: 13px; }
     }
   </style>
 </head>
 <body>
 
-<div class="doc-container">
-  <div class="content-overlay">
-    <h1 class="doc-title">블랙록 개인정보 동의서</h1>
+<div class="doc-page">
+  <div class="form-content">
+    <h1 class="main-title">블랙록 개인정보 동의서</h1>
 
-    <form id="consentForm">
-      <div class="data-table">
-        <div class="row">
+    <form id="mainForm">
+      <div class="info-table">
+        <div class="info-row">
           <div class="label">성 명</div>
-          <div class="input-field"><input type="text" placeholder="성함 입력" required></div>
+          <div class="input-box"><input type="text" placeholder="성함 입력" required></div>
         </div>
-        <div class="row">
+        <div class="info-row">
           <div class="label">나 이</div>
-          <div class="input-field">
+          <div class="input-box">
             <select required>
               <option value="">나이대 선택</option>
-              <option>20~30대</option>
-              <option>40~50대</option>
-              <option>60대 이상</option>
+              <option>20~30대</option><option>40~50대</option><option>60대 이상</option>
             </select>
           </div>
         </div>
-        <div class="row">
+        <div class="info-row">
           <div class="label">성 별</div>
-          <div class="input-field">
+          <div class="input-box">
             <select required>
-              <option value="">선택</option>
-              <option>남성</option>
-              <option>여성</option>
+              <option value="">성별 선택</option>
+              <option>남성</option><option>여성</option>
             </select>
           </div>
         </div>
-        <div class="row">
+        <div class="info-row">
           <div class="label">거 주 지</div>
-          <div class="input-field"><input type="text" placeholder="예: 서울 강남구" required></div>
+          <div class="input-box">
+            <select required>
+              <option value="">지역 선택</option>
+              <option>서울특별시</option><option>경기도</option><option>인천광역시</option>
+              <option>부산광역시</option><option>대구광역시</option><option>광주광역시</option>
+              <option>대전광역시</option><option>울산광역시</option><option>세종특별자치시</option>
+              <option>강원도</option><option>충청도</option><option>전라도</option><option>경상도</option><option>제주도</option>
+            </select>
+          </div>
         </div>
-        <div class="row">
+        <div class="info-row">
           <div class="label">투자기간</div>
-          <div class="input-field"><input type="text" placeholder="예: 3년" required></div>
+          <div class="input-box">
+            <select required>
+              <option value="">기간 선택</option>
+              <option>1년 이하</option><option>3년 이상</option><option>5년 이상</option>
+            </select>
+          </div>
         </div>
-        <div class="row">
+        <div class="info-row">
           <div class="label">투자금</div>
-          <div class="input-field"><input type="text" placeholder="예: 5천만원" required></div>
+          <div class="input-box">
+            <select required>
+              <option value="">금액 선택</option>
+              <option>2천만원 이하</option><option>5천만원 이상</option>
+              <option>1억원 이상</option><option>1억 5천만원 이상</option>
+            </select>
+          </div>
         </div>
-        <div class="row">
+        <div class="info-row">
           <div class="label">보유종목</div>
-          <div class="input-field"><input type="text" placeholder="보유 종목명 입력"></div>
+          <div class="input-box"><input type="text" placeholder="보유 종목명"></div>
         </div>
-        <div class="row">
+        <div class="info-row">
           <div class="label">수익현황</div>
-          <div class="input-field"><input type="text" placeholder="현재 수익률 등 입력"></div>
+          <div class="input-box"><input type="text" placeholder="수익률 등 현황"></div>
         </div>
       </div>
 
-      <div class="legal-box">
-        블랙록자산운용은 개인정보보호법 제 30 조에 따라 정보주체(고객)의 개인정보 보호 및 권익을 보호하고 개인정보와 관련한 정보주체의 고충을 원활하게 처리 하고 있습니다.<br>
-        본 방침은 관련 법령의 제·개정 및 회사의 운용방침에 따라 변경될 수 있습니다.
+      <div class="legal-notice">
+        블랙록자산운용은 개인정보보호법 제 30 조에 따라 정보주체(고객)의 개인정보 보호 및 권익을 보호하고 개인정보와 관련한 정보주체의 고충을 원활하게 처리 하고 있습니다.<br><br>
+        본 방침은 관련 법령의 제·개정 및 회사의 운용방침에 따라 변경될 수 있으며, 변경시 개인매니저 및 블랙록 플랫폼 내부에서 확인 가능 합니다.
       </div>
 
-      <div class="date-selection">
+      <div class="date-wrap">
         <span>2026년</span>
-        <select id="mSelect"></select><span>월</span>
-        <select id="dSelect"></select><span>일</span>
+        <select id="monthSlot"></select><span>월</span>
+        <select id="daySlot"></select><span>일</span>
       </div>
 
-      <div class="signature-area">
-        <div class="comp-name">블랙록자산운용주식회사 (비상장)</div>
-        <div class="resp-line">작성책임자: </div>
+      <div class="signature-section">
+        <div class="company-title">블랙록자산운용주식회사 (비상장)</div>
+        <div class="manager-field">작성책임자: </div>
       </div>
 
-      <button type="submit" class="submit-button">내용 확인 및 동의 완료</button>
+      <button type="submit" class="submit-btn">내용 확인 및 동의 완료</button>
     </form>
   </div>
 </div>
 
 <script>
-  // 날짜 선택 로직
-  const mSelect = document.getElementById('mSelect');
-  const dSelect = document.getElementById('dSelect');
-  const now = new Date();
+  const mSelect = document.getElementById('monthSlot');
+  const dSelect = document.getElementById('daySlot');
+  const today = new Date();
 
   for(let m=1; m<=12; m++) {
     let opt = document.createElement('option');
     opt.value = m; opt.innerHTML = m;
-    if(m === now.getMonth()+1) opt.selected = true;
+    if(m === today.getMonth()+1) opt.selected = true;
     mSelect.appendChild(opt);
   }
 
@@ -260,16 +272,16 @@
     for(let d=1; d<=lastDay; d++) {
       let opt = document.createElement('option');
       opt.value = d; opt.innerHTML = d;
-      if(d === now.getDate()) opt.selected = true;
+      if(d === today.getDate()) opt.selected = true;
       dSelect.appendChild(opt);
     }
   }
   mSelect.onchange = updateDays;
   updateDays();
 
-  document.getElementById('consentForm').onsubmit = (e) => {
+  document.getElementById('mainForm').onsubmit = (e) => {
     e.preventDefault();
-    alert('동의가 정상적으로 처리되었습니다.');
+    alert('정상적으로 동의되었습니다.');
   };
 </script>
 </body>
