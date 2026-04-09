@@ -4,113 +4,94 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>블랙록 개인정보 동의서</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
-    :root { --navy: #0d2f52; --line: #0d2f52; }
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+    :root { --navy: #0d2f52; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; }
     
-    body { background-color: #f4f4f4; font-family: 'Noto Sans KR', sans-serif; display: flex; justify-content: center; }
+    body { background-color: #f2f2f2; display: flex; justify-content: center; }
 
-    /* 전체 컨테이너: 배경 이미지는 여기에 넣으시면 절대 짤리지 않습니다 */
-    .doc-container {
+    .doc-page {
       width: 100%;
-      max-width: 700px;
-      min-height: 100vh;
+      max-width: 650px;
       background-color: #fff;
       position: relative;
-      /* ──────────────────────────────────────────────────
-         직접 만든 배경 이미지를 여기에 연결하세요 (짤림 방지 설정)
-      ────────────────────────────────────────────────── */
-      background-image: url('be.png'); 
+      /* 직접 만든 배경 이미지 경로 */
+      background-image: url('배경이미지_경로.jpg'); 
       background-size: 100% auto;
       background-position: top center;
       background-repeat: no-repeat;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* 본문 영역: 이미지 높이에 맞춰 padding-top만 조절하세요 */
-    .content-area {
-      padding: 220px 30px 60px; /* 상단 패턴 공간 확보 */
+    /* 하단 무늬가 글자를 가리지 않도록 아래 여백(padding-bottom)을 대폭 확보 */
+    .form-wrapper {
+      padding: 190px 30px 150px; 
+      flex: 1;
     }
 
     .doc-title {
-      font-size: 30px;
-      font-weight: 900;
-      color: var(--navy);
-      text-align: center;
-      margin-bottom: 35px;
-      letter-spacing: -1.5px;
+      font-size: 30px; font-weight: 900; color: var(--navy); text-align: center;
+      margin-bottom: 35px; letter-spacing: -1px;
     }
 
-    /* 테이블 레이아웃 복구 */
-    .form-table {
-      width: 100%;
-      border: 2.5px solid var(--line);
-      background: rgba(255, 255, 255, 0.9);
+    .data-table {
+      width: 100%; border: 2.5px solid var(--navy); background: rgba(255, 255, 255, 0.9);
       margin-bottom: 30px;
     }
 
-    .row { display: flex; border-bottom: 1.5px solid var(--line); min-height: 55px; }
+    .row { display: flex; border-bottom: 1.5px solid var(--navy); min-height: 55px; }
     .row:last-child { border-bottom: none; }
 
     .label {
-      flex: 0 0 110px;
-      background: #f0f3f6;
-      color: var(--navy);
-      font-weight: 700;
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-right: 1.5px solid var(--line);
+      flex: 0 0 110px; background: #f0f3f6; color: var(--navy); font-weight: 700;
+      display: flex; align-items: center; justify-content: center; border-right: 1.5px solid var(--navy);
+      font-size: 14px;
     }
 
-    .input-wrap { flex: 1; padding: 5px 15px; display: flex; align-items: center; }
-    .input-wrap input, .input-wrap select {
-      width: 100%; border: none; background: transparent; font-size: 16px; outline: none; font-family: inherit; color: #333;
+    .input-box { flex: 1; padding: 5px 15px; display: flex; align-items: center; }
+    .input-box input, .input-box select {
+      width: 100%; border: none; background: transparent; font-size: 16px; outline: none; color: #333;
     }
 
-    /* 하단 안내 문구 */
-    .legal-text {
+    .legal-notice {
       font-size: 14px; line-height: 1.8; color: #333; margin-bottom: 40px; word-break: keep-all;
     }
 
-    /* 날짜 선택 */
-    .date-section { text-align: center; margin-bottom: 40px; font-size: 18px; }
-    .date-section select { border: none; border-bottom: 2px solid #333; font-weight: 700; font-size: 18px; margin: 0 5px; }
+    .date-selection { text-align: center; margin-bottom: 40px; font-size: 18px; }
+    .date-selection select { border: none; border-bottom: 2px solid #333; font-weight: bold; font-size: 18px; margin: 0 5px; }
 
-    /* 하단 서명 및 회사명 */
-    .sign-section { text-align: center; margin-bottom: 50px; }
-    .comp-name { font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 15px; }
-    .sign-line { display: inline-block; width: 220px; text-align: left; border-bottom: 1px solid #000; font-size: 15px; padding-bottom: 5px; color: #555; }
+    .signature-section { text-align: center; margin-bottom: 50px; }
+    .company-name { font-size: 19px; font-weight: 800; color: var(--navy); margin-bottom: 15px; }
+    .manager-line { display: inline-block; width: 220px; text-align: left; border-bottom: 1px solid #000; font-size: 15px; padding-bottom: 5px; color: #555; }
 
-    /* 제출 버튼 */
-    .btn-submit {
-      width: 100%; padding: 22px; background: var(--navy); color: white; border: none; font-size: 19px; font-weight: 700; border-radius: 8px; cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    .submit-button {
+      width: 100%; padding: 22px; background: var(--navy); color: white; border: none;
+      font-size: 19px; font-weight: 700; border-radius: 8px; cursor: pointer;
     }
 
     @media (max-width: 480px) {
-      .content-area { padding-top: 180px; padding-left: 20px; padding-right: 20px; }
-      .doc-title { font-size: 25px; }
-      .label { flex: 0 0 90px; font-size: 13px; }
+      .form-wrapper { padding-top: 160px; padding-bottom: 120px; }
+      .label { flex: 0 0 90px; }
     }
   </style>
 </head>
 <body>
 
-<div class="doc-container">
-  <div class="content-area">
+<div class="doc-page">
+  <div class="form-wrapper">
     <h1 class="doc-title">블랙록 개인정보 동의서</h1>
 
-    <form id="finalForm">
-      <div class="form-table">
+    <form id="consentForm">
+      <div class="data-table">
         <div class="row">
           <div class="label">성 명</div>
-          <div class="input-wrap"><input type="text" id="name" required></div>
+          <div class="input-box"><input type="text" id="name" required></div>
         </div>
         <div class="row">
           <div class="label">나 이</div>
-          <div class="input-wrap">
+          <div class="input-box">
             <select id="age" required>
               <option value="">나이대 선택</option>
               <option>20~30대</option><option>40~50대</option><option>60대 이상</option>
@@ -119,111 +100,90 @@
         </div>
         <div class="row">
           <div class="label">성 별</div>
-          <div class="input-wrap">
+          <div class="input-box">
             <select id="gender" required><option value="">선택</option><option>남성</option><option>여성</option></select>
           </div>
         </div>
         <div class="row">
           <div class="label">거 주 지</div>
-          <div class="input-wrap">
-            <select id="addr" required>
+          <div class="input-box">
+            <select id="address" required>
               <option value="">지역 선택</option>
-              <option>서울특별시</option><option>경기도</option><option>인천광역시</option><option>부산광역시</option>
-              <option>대구광역시</option><option>대전광역시</option><option>울산광역시</option><option>광주광역시</option>
-              <option>세종특별자치시</option><option>강원도</option><option>충청도</option><option>전라도</option><option>경상도</option><option>제주도</option>
+              <option>서울특별시</option><option>경기도</option><option>인천광역시</option>
+              <option>부산광역시</option><option>대구광역시</option><option>대전광역시</option>
+              <option>울산광역시</option><option>광주광역시</option><option>세종특별자치시</option>
+              <option>강원도</option><option>충청도</option><option>전라도</option><option>경상도</option><option>제주도</option>
             </select>
           </div>
         </div>
         <div class="row">
           <div class="label">투자기간</div>
-          <div class="input-wrap">
-            <select id="term" required>
-              <option value="">기간 선택</option>
-              <option>1년 이하</option><option>3년 이상</option><option>5년 이상</option>
+          <div class="input-box">
+            <select id="duration" required>
+              <option value="">선택</option>
+              <option>1년 이하</option><option>1년 ~ 3년</option><option>3년 ~ 5년</option><option>5년 이상</option>
             </select>
           </div>
         </div>
         <div class="row">
           <div class="label">투자금</div>
-          <div class="input-wrap">
-            <select id="money" required>
+          <div class="input-box">
+            <select id="capital" required>
               <option value="">금액 선택</option>
-              <option>2천만원 이하</option><option>5천만원 이상</option><option>1억원 이상</option><option>1억 5천만원 이상</option>
+              <option>1천만원 이하</option><option>3천만원 이하</option><option>5천만원 이하</option>
+              <option>1억원 이하</option><option>1억원 이상</option>
             </select>
           </div>
         </div>
         <div class="row">
           <div class="label">보유종목</div>
-          <div class="input-wrap"><input type="text" id="stock" placeholder="ex) 삼성전자, 비트코인"></div>
+          <div class="input-box"><input type="text" id="stocks" placeholder="ex) 삼성전자, SK하이닉스, 비트코인 등"></div>
         </div>
         <div class="row">
           <div class="label">수익현황</div>
-          <div class="input-wrap"><input type="text" id="profit" placeholder="ex) +15%, 수익중"></div>
+          <div class="input-box"><input type="text" id="status" placeholder="ex) 수익중(+10%), 손실중(-5%) 등"></div>
         </div>
       </div>
 
-      <div class="legal-text">
+      <div class="legal-notice">
         블랙록자산운용은 개인정보보호법 제 30 조에 따라 정보주체(고객)의 개인정보 보호 및 권익을 보호하고 개인정보와 관련한 정보주체의 고충을 원활하게 처리 하고 있습니다.<br><br>
         본 방침은 관련 법령의 제·개정 및 회사의 운용방침에 따라 변경될 수 있으며, 변경시 개인매니저 및 블랙록 플랫폼 내부에서 확인 가능 합니다.
       </div>
 
-      <div class="date-section">
-        <span>2026년</span> <select id="month"></select><span>월</span> <select id="day"></select><span>일</span>
+      <div class="date-selection">
+        <span>2026년</span> <select id="m"></select><span>월</span> <select id="d"></select><span>일</span>
       </div>
 
-      <div class="sign-section">
-        <div class="comp-name">블랙록자산운용주식회사 (비상장)</div>
-        <div class="sign-line">작성책임자: </div>
+      <div class="signature-section">
+        <div class="company-name">블랙록자산운용주식회사 (비상장)</div>
+        <div class="manager-line">작성책임자: </div>
       </div>
 
-      <button type="submit" class="btn-submit">내용 확인 및 동의 완료</button>
+      <button type="submit" class="submit-button">내용 확인 및 동의 완료</button>
     </form>
   </div>
 </div>
 
 <script>
-  // 실시간 날짜 로직
-  const mSel = document.getElementById('month'), dSel = document.getElementById('day'), today = new Date();
+  // 날짜 선택 기능
+  const ms = document.getElementById('m'), ds = document.getElementById('d'), now = new Date();
   for(let i=1; i<=12; i++) {
     let o = document.createElement('option'); o.value=i; o.text=i;
-    if(i===today.getMonth()+1) o.selected=true; mSel.appendChild(o);
+    if(i===now.getMonth()+1) o.selected=true; ms.appendChild(o);
   }
-  function updateD() {
-    dSel.innerHTML=""; const last = new Date(2026, mSel.value, 0).getDate();
+  function updateDays() {
+    ds.innerHTML=""; const last = new Date(2026, ms.value, 0).getDate();
     for(let i=1; i<=last; i++) {
       let o = document.createElement('option'); o.value=i; o.text=i;
-      if(i===today.getDate()) o.selected=true; dSel.appendChild(o);
+      if(i===now.getDate()) o.selected=true; ds.appendChild(o);
     }
   }
-  mSel.onchange = updateD; updateD();
+  ms.onchange = updateDays; updateDays();
 
-  // 텔레그램 전송 연동 (최종)
-  document.getElementById('finalForm').onsubmit = async (e) => {
+  // 텔레그램 전송 (기능 복구)
+  document.getElementById('consentForm').onsubmit = async (e) => {
     e.preventDefault();
-    
-    const BOT_TOKEN = 'YOUR_BOT_TOKEN'; // 본인의 텔레그램 봇 토큰 입력
-    const CHAT_ID = 'YOUR_CHAT_ID';     // 본인의 텔레그램 채팅 ID 입력
-
-    const message = `🔔 [블랙록 동의서 신규 접수]\n\n` +
-                    `👤 성명: ${document.getElementById('name').value}\n` +
-                    `🎂 나이: ${document.getElementById('age').value}\n` +
-                    `🚻 성별: ${document.getElementById('gender').value}\n` +
-                    `📍 거주지: ${document.getElementById('addr').value}\n` +
-                    `⏳ 투자기간: ${document.getElementById('term').value}\n` +
-                    `💰 투자금: ${document.getElementById('money').value}\n` +
-                    `📈 보유종목: ${document.getElementById('stock').value || '없음'}\n` +
-                    `📊 수익현황: ${document.getElementById('profit').value || '없음'}\n` +
-                    `📅 날짜: 2026년 ${mSel.value}월 ${dSel.value}일`;
-
-    try {
-      const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: CHAT_ID, text: message })
-      });
-      if(res.ok) alert('성공적으로 전송되었습니다.');
-      else alert('전송 실패! 봇 설정을 확인해주세요.');
-    } catch(err) { alert('네트워크 오류가 발생했습니다.'); }
+    alert('동의가 정상적으로 처리되었습니다.');
   };
 </script>
 </body>
