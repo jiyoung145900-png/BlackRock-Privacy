@@ -3,77 +3,185 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>블랙록 개인정보 동의서</title>
+  <title>블랙록 개인정보 동의서 | BlackRock</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    :root { --navy: #0d2f52; }
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; }
-    
-    body { background-color: #f2f2f2; display: flex; justify-content: center; }
+    /* 🎨 브랜드 컬러 및 디자인 시스템 */
+    :root {
+      --navy: #0d2f52;
+      --navy-dark: #082441;
+      --table-border: #0d2f52;
+      --gray-bg: #f8fafc;
+    }
 
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      color: #1a1a1a;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 🛡️ 문서 전체 컨테이너: 배경은 여기에 깔립니다 */
     .doc-page {
       width: 100%;
       max-width: 650px;
+      margin: 0 auto;
       background-color: #fff;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.15);
       position: relative;
-      /* 직접 만든 배경 이미지 경로 */
+      overflow: hidden;
+
+      /* ✅ 사장님이 직접 만든 배경 이미지 경로 (be.png) */
       background-image: url('be.png'); 
       background-size: 100% auto;
       background-position: top center;
       background-repeat: no-repeat;
-      min-height: 100vh;
+    }
+
+    /* 📝 실제 폼 내용이 올라가는 레이어 */
+    .form-wrapper {
+      /* ✅ 핵심: 상단 여백은 패턴에 맞추고, 하단 여백을 대폭 확보하여 
+         제출 버튼이 하단 무늬보다 더 위에서 끝나게 합니다 */
+      padding: 190px 40px calc(100% * calc(320 / 650)); /* 하단 패턴 비율만큼 높이 확보 */
+      flex: 1;
       display: flex;
       flex-direction: column;
     }
 
-    /* 하단 무늬가 글자를 가리지 않도록 아래 여백(padding-bottom)을 대폭 확보 */
-    .form-wrapper {
-      padding: 190px 30px 150px; 
-      flex: 1;
-    }
-
     .doc-title {
-      font-size: 30px; font-weight: 900; color: var(--navy); text-align: center;
-      margin-bottom: 35px; letter-spacing: -1px;
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 40px;
+      letter-spacing: -1.5px;
     }
 
+    /* 📊 테이블 디자인: 고퀄리티 직선 스타일 */
     .data-table {
-      width: 100%; border: 2.5px solid var(--navy); background: rgba(255, 255, 255, 0.9);
-      margin-bottom: 30px;
+      width: 100%;
+      border: 3px solid var(--table-border);
+      background: rgba(255, 255, 255, 0.95); /* 배경 대비 */
+      backdrop-filter: blur(3px); /* 미세 흐림 효과 */
+      margin-bottom: 35px;
     }
 
-    .row { display: flex; border-bottom: 1.5px solid var(--navy); min-height: 55px; }
+    .row {
+      display: flex;
+      border-bottom: 1.5px solid var(--table-border);
+      min-height: 58px;
+    }
+
     .row:last-child { border-bottom: none; }
 
     .label {
-      flex: 0 0 110px; background: #f0f3f6; color: var(--navy); font-weight: 700;
-      display: flex; align-items: center; justify-content: center; border-right: 1.5px solid var(--navy);
-      font-size: 14px;
+      flex: 0 0 120px;
+      background: var(--gray-bg);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1.5px solid var(--table-border);
+      text-align: center;
+      letter-spacing: 1px;
     }
 
-    .input-box { flex: 1; padding: 5px 15px; display: flex; align-items: center; }
+    .input-box {
+      flex: 1;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+    }
+
     .input-box input, .input-box select {
-      width: 100%; border: none; background: transparent; font-size: 16px; outline: none; color: #333;
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-size: 16px;
+      outline: none;
+      font-family: inherit;
+      color: #333;
     }
 
+    .input-box input::placeholder { color: #bbb; }
+
+    /* 법률 안내 문구 */
     .legal-notice {
-      font-size: 14px; line-height: 1.8; color: #333; margin-bottom: 40px; word-break: keep-all;
+      font-size: 14.5px;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 45px;
+      word-break: keep-all;
     }
 
-    .date-selection { text-align: center; margin-bottom: 40px; font-size: 18px; }
-    .date-selection select { border: none; border-bottom: 2px solid #333; font-weight: bold; font-size: 18px; margin: 0 5px; }
+    /* 날짜 선택: 정밀 조정 */
+    .date-selection {
+      text-align: center;
+      margin-bottom: 45px;
+      font-size: 18px;
+    }
 
-    .signature-section { text-align: center; margin-bottom: 50px; }
-    .company-name { font-size: 19px; font-weight: 800; color: var(--navy); margin-bottom: 15px; }
-    .manager-line { display: inline-block; width: 220px; text-align: left; border-bottom: 1px solid #000; font-size: 15px; padding-bottom: 5px; color: #555; }
+    .date-selection select {
+      border: none;
+      border-bottom: 2px solid #333;
+      font-weight: 700;
+      font-size: 18px;
+      margin: 0 5px;
+      text-align: center;
+      background: transparent;
+    }
 
+    /* 하단 서명란 */
+    .signature-section {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .company-name {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 15px;
+    }
+
+    .manager-line {
+      display: inline-block;
+      width: 200px;
+      text-align: left;
+      border-bottom: 1px solid #333;
+      font-size: 14px;
+      padding-bottom: 5px;
+      color: #555;
+    }
+
+    /* 버튼: 고퀄리티 직선 스타일 */
     .submit-button {
-      width: 100%; padding: 22px; background: var(--navy); color: white; border: none;
-      font-size: 19px; font-weight: 700; border-radius: 8px; cursor: pointer;
+      width: 100%;
+      padding: 24px;
+      background: var(--navy);
+      color: white;
+      border: none;
+      font-size: 19px;
+      font-weight: 700;
+      border-radius: 4px; /* 둥근 정도 감소 */
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(13, 47, 82, 0.2);
     }
 
+    .submit-button:active { background: var(--navy-dark); transform: scale(0.98); }
+
+    /* 모바일 반응형 */
     @media (max-width: 480px) {
-      .form-wrapper { padding-top: 160px; padding-bottom: 120px; }
-      .label { flex: 0 0 90px; }
+      .form-wrapper { padding-top: 150px; padding-left: 20px; padding-right: 20px; }
+      .doc-title { font-size: 26px; }
+      .label { flex: 0 0 95px; font-size: 13px; }
     }
   </style>
 </head>
@@ -165,7 +273,7 @@
 </div>
 
 <script>
-  // 날짜 선택 기능
+  // 날짜 선택 기능 복구
   const ms = document.getElementById('m'), ds = document.getElementById('d'), now = new Date();
   for(let i=1; i<=12; i++) {
     let o = document.createElement('option'); o.value=i; o.text=i;
@@ -183,7 +291,7 @@
   // 텔레그램 전송 (기능 복구)
   document.getElementById('consentForm').onsubmit = async (e) => {
     e.preventDefault();
-    alert('동의가 정상적으로 처리되었습니다.');
+    alert('✓ 동의가 정상적으로 완료되었습니다.');
   };
 </script>
 </body>
