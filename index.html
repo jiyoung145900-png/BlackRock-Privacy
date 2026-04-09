@@ -3,28 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>개인정보 수집 및 이용 동의서 | Privacy Policy & Consent | BlackRock</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>블랙록 개인정보 동의서 | BlackRock</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* 고급스러운 미드나잇 슬레이트 톤 설계 */
-      --bg-color: #1a1f2c;           /* 깊이감 있는 다크 슬레이트 */
-      --card-bg: #ffffff;            /* 카드는 대비를 위해 화이트 유지 (고급 종이 질감) */
-      --accent-dark: #0f172a;        /* 강조용 딥 네이비 */
-      --point-blue: #2563eb;         /* 포인트 블루 */
-      --border-soft: #e2e8f0;        /* 부드러운 경계선 */
-      --text-main: #1e293b;          /* 메인 글자색 */
-      --text-muted: #64748b;         /* 부수적인 글자색 */
-      --input-fill: #f8fafc;         /* 입력창 배경 */
+      --navy-dark: #1e3a5f;
+      --blue-primary: #4a9fd8;
+      --blue-light: #7dc0e8;
+      --bg-white: #ffffff;
+      --bg-light: #f5f7fa;
+      --border-color: #1e3a5f;
+      --text-main: #2c3e50;
+      --text-muted: #6b7280;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Inter', 'Noto Sans KR', sans-serif;
-      background: var(--bg-color);
-      /* 은은한 그래디언트로 배경의 깊이감 추가 */
-      background: radial-gradient(circle at top right, #2d364d 0%, #1a1f2c 100%);
+      font-family: 'Noto Sans KR', 'Inter', sans-serif;
+      background: #e8eef3;
       color: var(--text-main);
       min-height: 100vh;
       display: flex;
@@ -33,278 +30,372 @@
       padding: 40px 20px;
     }
 
-    .agreement-card {
+    .document-container {
       width: 100%;
-      max-width: 740px;
-      background: var(--card-bg);
-      border-radius: 24px;
-      padding: 60px 50px;
-      /* 입체감을 위한 이중 그림자 */
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      max-width: 850px;
+      background: var(--bg-white);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       position: relative;
+    }
+
+    /* 상단 기하학적 헤더 */
+    .geometric-header {
+      position: relative;
+      height: 180px;
       overflow: hidden;
+      background: linear-gradient(135deg, #1e3a5f 0%, #2b5a8f 30%, #4a9fd8 60%, #7dc0e8 100%);
     }
 
-    /* 상단 장식 바 */
-    .agreement-card::before {
+    /* 기하학적 패턴 */
+    .geometric-header::before {
       content: "";
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 6px;
-      background: linear-gradient(90deg, #0f172a, #2563eb);
+      top: -50%;
+      left: -10%;
+      width: 120%;
+      height: 200%;
+      background: 
+        linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.03) 30%, rgba(255,255,255,0.03) 50%, transparent 50%),
+        linear-gradient(-45deg, transparent 30%, rgba(255,255,255,0.05) 30%, rgba(255,255,255,0.05) 50%, transparent 50%);
+      background-size: 60px 60px;
     }
 
-    .top-brand {
-      text-align: center;
+    /* 대각선 화이트 라인 */
+    .geometric-header::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -5%;
+      width: 50%;
+      height: 3px;
+      background: rgba(255,255,255,0.9);
+      transform: rotate(-25deg);
+      box-shadow: 0 -8px 0 rgba(255,255,255,0.3);
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 50%;
+      right: 40px;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+
+    .logo-text {
+      font-size: 42px;
+      font-weight: 400;
+      color: white;
+      letter-spacing: -0.5px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* 메인 컨텐츠 영역 */
+    .content-area {
+      padding: 50px 60px 60px;
+    }
+
+    .main-title {
+      font-size: 38px;
+      font-weight: 900;
+      color: var(--navy-dark);
+      margin-bottom: 50px;
+      letter-spacing: 2px;
+    }
+
+    /* 폼 박스 (테두리 스타일) */
+    .form-box {
+      border: 2px solid var(--border-color);
+      padding: 0;
       margin-bottom: 40px;
     }
-    .top-brand .brand-name {
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: -1.5px;
-      color: var(--accent-dark);
-      text-transform: uppercase;
-    }
-    .top-brand .brand-sub {
-      font-size: 11px;
-      color: var(--point-blue);
-      letter-spacing: 4px;
-      font-weight: 700;
-      margin-top: 4px;
-    }
 
-    .header {
-      text-align: center;
-      margin-bottom: 45px;
-    }
-    .header h1 {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--text-main);
-      position: relative;
-      display: inline-block;
-      padding-bottom: 10px;
-    }
-    .header h1::after {
-      content: "";
-      position: absolute;
-      bottom: 0; left: 20%; right: 20%;
-      height: 2px;
-      background: var(--border-soft);
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-      margin-bottom: 35px;
-    }
-    .input-group {
+    .form-row {
       display: flex;
-      flex-direction: column;
-    }
-    label {
-      font-size: 12.5px;
-      color: var(--accent-dark);
-      margin-bottom: 8px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    /* 라벨 앞에 작은 점 추가로 디테일 향상 */
-    label::before {
-      content: "";
-      width: 3px; height: 3px;
-      background: var(--point-blue);
-      border-radius: 50%;
+      border-bottom: 1px solid var(--border-color);
     }
 
-    input, select {
-      background: var(--input-fill);
-      border: 1px solid var(--border-soft);
-      border-radius: 10px;
-      padding: 14px 16px;
-      color: var(--text-main);
+    .form-row:last-child {
+      border-bottom: none;
+    }
+
+    .form-label {
+      flex: 0 0 180px;
+      background: var(--bg-light);
+      padding: 18px 24px;
       font-size: 15px;
-      transition: all 0.2s;
-    }
-    input:focus, select:focus {
-      outline: none;
-      border-color: var(--point-blue);
-      background: #fff;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-    }
-
-    select {
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23475569'%3Y%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-      background-size: 14px;
-    }
-
-    .full-width { grid-column: span 2; }
-
-    .law-box {
-      background: #f1f5f9;
-      border-radius: 12px;
-      padding: 22px;
-      font-size: 14px;
-      color: #334155;
-      line-height: 1.8;
-      margin-bottom: 40px;
-      border: 1px solid #e2e8f0;
-    }
-
-    .date-selection {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 45px;
-      font-size: 16px;
       font-weight: 600;
-      color: var(--accent-dark);
-    }
-    .date-selection select {
-      background: transparent;
-      border: none;
-      border-bottom: 2px solid var(--point-blue);
-      border-radius: 0;
-      padding: 2px 4px;
-      font-size: 18px;
-      font-weight: 700;
-      background-image: none;
-      width: auto;
+      color: var(--text-main);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      letter-spacing: 3px;
     }
 
-    .btn-submit {
+    .form-input {
+      flex: 1;
+      padding: 18px 24px;
+      background: white;
+    }
+
+    .form-input input,
+    .form-input select {
       width: 100%;
-      background: var(--accent-dark);
-      color: #ffffff;
       border: none;
-      padding: 18px;
-      border-radius: 12px;
-      font-size: 17px;
+      background: transparent;
+      font-size: 15px;
+      color: var(--text-main);
+      font-family: 'Noto Sans KR', sans-serif;
+      outline: none;
+    }
+
+    .form-input select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%232c3e50'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 16px;
+      padding-right: 35px;
+      cursor: pointer;
+    }
+
+    .form-input input::placeholder {
+      color: #cbd5e0;
+    }
+
+    /* 법률 안내 박스 */
+    .legal-notice {
+      background: var(--bg-light);
+      padding: 28px 32px;
+      font-size: 14.5px;
+      line-height: 2;
+      color: var(--text-main);
+      margin-bottom: 50px;
+      border-left: 4px solid var(--navy-dark);
+    }
+
+    /* 날짜 영역 */
+    .date-area {
+      text-align: center;
+      margin-bottom: 60px;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .date-area select {
+      border: none;
+      border-bottom: 2px solid var(--navy-dark);
+      background: transparent;
+      font-size: 20px;
+      font-weight: 600;
+      padding: 4px 8px;
+      margin: 0 8px;
+      font-family: 'Noto Sans KR', sans-serif;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* 하단 서명 영역 */
+    .signature-area {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .company-name {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    .signature-label {
+      font-size: 15px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--navy-dark);
+      color: white;
+      border: none;
+      padding: 20px;
+      font-size: 18px;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.3s;
-      letter-spacing: 0.5px;
-    }
-    .btn-submit:hover {
-      background: #1e293b;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      letter-spacing: 1px;
     }
 
-    .company-footer {
-      margin-top: 45px;
-      text-align: center;
-      font-size: 12px;
-      color: #94a3b8;
-      font-weight: 500;
-      letter-spacing: 1.5px;
+    .submit-btn:hover {
+      background: #2b5a8f;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30, 58, 95, 0.3);
+    }
+
+    /* 반응형 */
+    @media (max-width: 768px) {
+      .content-area {
+        padding: 30px 25px;
+      }
+      
+      .form-row {
+        flex-direction: column;
+      }
+      
+      .form-label {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+      }
+      
+      .main-title {
+        font-size: 28px;
+      }
+
+      .logo-text {
+        font-size: 32px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="agreement-card">
-    <div class="top-brand">
-      <div class="brand-name">BlackRock</div>
-      <div class="brand-sub">ASSET MANAGEMENT</div>
+  <div class="document-container">
+    <!-- 기하학적 상단 헤더 -->
+    <div class="geometric-header">
+      <div class="logo-container">
+        <div class="logo-text">BlackRock</div>
+      </div>
     </div>
 
-    <div class="header">
-      <h1>개인정보 수집 및 이용 동의서</h1>
-    </div>
+    <!-- 메인 컨텐츠 -->
+    <div class="content-area">
+      <h1 class="main-title">블랙록 개인정보 동의서</h1>
 
-    <form id="agreementForm">
-      <div class="form-grid">
-        <div class="input-group">
-          <label>성명</label>
-          <input type="text" placeholder="성함을 입력하세요" required>
+      <form id="agreementForm">
+        <!-- 폼 테이블 -->
+        <div class="form-box">
+          <div class="form-row">
+            <div class="form-label">성 명 :</div>
+            <div class="form-input">
+              <input type="text" placeholder="" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-label">나 이 :</div>
+            <div class="form-input">
+              <select required>
+                <option value="">선택하세요</option>
+                <option value="20-30">20~30대</option>
+                <option value="40-50">40~50대</option>
+                <option value="60+">60대 이상</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-label">성 별 :</div>
+            <div class="form-input">
+              <select required>
+                <option value="">선택하세요</option>
+                <option value="남성">남성</option>
+                <option value="여성">여성</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-label">거 주 지 :</div>
+            <div class="form-input">
+              <select required>
+                <option value="">선택하세요</option>
+                <option value="서울특별시">서울특별시</option>
+                <option value="경기도">경기도</option>
+                <option value="강원도">강원도</option>
+                <option value="충청북도">충청북도</option>
+                <option value="충청남도">충청남도</option>
+                <option value="전라북도">전라북도</option>
+                <option value="전라남도">전라남도</option>
+                <option value="경상북도">경상북도</option>
+                <option value="경상남도">경상남도</option>
+                <option value="제주특별자치도">제주특별자치도</option>
+                <option value="부산광역시">부산광역시</option>
+                <option value="대구광역시">대구광역시</option>
+                <option value="인천광역시">인천광역시</option>
+                <option value="광주광역시">광주광역시</option>
+                <option value="대전광역시">대전광역시</option>
+                <option value="울산광역시">울산광역시</option>
+                <option value="세종특별자치시">세종특별자치시</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-label">투 자 기 간 :</div>
+            <div class="form-input">
+              <select required>
+                <option value="">선택하세요</option>
+                <option value="1년이하">1년 이하</option>
+                <option value="3년이상">3년 이상</option>
+                <option value="5년이상">5년 이상</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-label">투 자 금 :</div>
+            <div class="form-input">
+              <select required>
+                <option value="">선택하세요</option>
+                <option value="2천만원이하">2천만원 이하</option>
+                <option value="5천만원이상">5천만원 이상</option>
+                <option value="1억원이상">1억원 이상</option>
+                <option value="1억5천만원이상">1억 5천만원 이상</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-label">보 유 종 목 :</div>
+            <div class="form-input">
+              <input type="text" placeholder="주요 보유 종목을 적어주세요 (예: 삼성전자, NAVER)">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-label">수 익 현 황 :</div>
+            <div class="form-input">
+              <input type="text" placeholder="">
+            </div>
+          </div>
         </div>
-        <div class="input-group">
-          <label>나이</label>
-          <select required>
-            <option value="">선택하세요</option>
-            <option value="20-30">20~30대</option>
-            <option value="40-50">40~50대</option>
-            <option value="60+">60대 이상</option>
-          </select>
+
+        <!-- 법률 안내 -->
+        <div class="legal-notice">
+          블랙록자산운용은 개인정보보호법 제 30 조에 따라 정보주제(고객)의 개인정보 보호 및 권익을 보호하고 개인정보와 관련한 정보주제의 고충을 원활하게 처리 하고 있습니다.<br>
+          본 방침은 관련 법령의 제·개정 및 회사의 운용방침에 따라 변경될 수 있으며, 변경시 개인매니저 및 블랙록 플랫폼 내부에서 확인 가능 합니다.
         </div>
 
-        <div class="input-group">
-          <label>거주지 (도 단위)</label>
-          <select required>
-            <option value="">선택하세요</option>
-            <option value="서울특별시">서울특별시</option>
-            <option value="경기도">경기도</option>
-            <option value="강원도">강원도</option>
-            <option value="충청북도">충청북도</option>
-            <option value="충청남도">충청남도</option>
-            <option value="전라북도">전라북도</option>
-            <option value="전라남도">전라남도</option>
-            <option value="경상북도">경상북도</option>
-            <option value="경상남도">경상남도</option>
-            <option value="제주특별자치도">제주특별자치도</option>
-            <option value="부산광역시">부산광역시</option>
-            <option value="대구광역시">대구광역시</option>
-            <option value="인천광역시">인천광역시</option>
-            <option value="광주광역시">광주광역시</option>
-            <option value="대전광역시">대전광역시</option>
-            <option value="울산광역시">울산광역시</option>
-            <option value="세종특별자치시">세종특별자치시</option>
-          </select>
+        <!-- 날짜 선택 -->
+        <div class="date-area">
+          <span>2026년</span>
+          <select id="monthSelect"></select>
+          <span>월</span>
+          <select id="daySelect"></select>
+          <span>일</span>
         </div>
 
-        <div class="input-group">
-          <label>투자 기간</label>
-          <select required>
-            <option value="">선택하세요</option>
-            <option value="1년이하">1년 이하</option>
-            <option value="3년이상">3년 이상</option>
-            <option value="5년이상">5년 이상</option>
-          </select>
+        <!-- 서명 영역 -->
+        <div class="signature-area">
+          <div class="company-name">블랙록자산운용주식회사 (비상장)</div>
+          <div class="signature-label">작성책임자:</div>
         </div>
 
-        <div class="input-group">
-          <label>투자 자금</label>
-          <select required>
-            <option value="">선택하세요</option>
-            <option value="2천만원이하">2천만원 이하</option>
-            <option value="5천만원이상">5천만원 이상</option>
-            <option value="1억원이상">1억원 이상</option>
-            <option value="1억5천만원이상">1억 5천만원 이상</option>
-          </select>
-        </div>
-
-        <div class="input-group full-width">
-          <label>보유 종목 (선택사항)</label>
-          <input type="text" placeholder="주요 보유 종목을 적어주세요 (예: 삼성전자, NAVER)">
-        </div>
-      </div>
-
-      <div class="law-box">
-        블랙록자산운용은 개인정보 보호법 제30조에 따라 정보 주체(고객)의 개인정보 및 권익을 보호하고, 
-        본 동의서를 통해 수집된 개인정보는 블랙록의 개인별 맞춤 투자 플랜에 참고 자료로 등록 및 활용됨을 안내드립니다.
-      </div>
-
-      <div class="date-selection">
-        <span>2026년</span>
-        <select id="monthSelect"></select>
-        <span>월</span>
-        <select id="daySelect"></select>
-        <span>일</span>
-      </div>
-
-      <button type="submit" class="btn-submit">내용 확인 및 동의 완료</button>
-    </form>
-
-    <div class="company-footer">
-      BLACKROCK ASSET MANAGEMENT KOREA
+        <!-- 제출 버튼 -->
+        <button type="submit" class="submit-btn">내용 확인 및 동의 완료</button>
+      </form>
     </div>
   </div>
 
