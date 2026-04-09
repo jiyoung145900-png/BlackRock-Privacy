@@ -43,9 +43,32 @@
 
     .legal-notice { font-size: 13px; line-height: 1.7; color: #555; margin-bottom: 35px; word-break: keep-all; }
     
-    /* 날짜 영역 레이아웃 유지 */
-    .date-wrap { text-align: center; margin-bottom: 35px; font-size: 18px; font-weight: 700; color: #222; }
-    .date-wrap select, .date-fix { border: none; border-bottom: 2px solid #333; font-size: 18px; font-weight: 800; background: transparent; margin: 0 4px; padding: 0 5px; text-align: center; display: inline-block; vertical-align: middle; }
+    /* ✅ 핵심 수정된 날짜 영역 */
+    .date-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      gap: 4px;
+
+      margin-bottom: 35px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .date-wrap select, .date-fix {
+      border: none;
+      border-bottom: 2px solid #333;
+      font-size: 18px;
+      font-weight: 800;
+      background: transparent;
+      padding: 0 5px;
+      text-align: center;
+      width: auto;
+      display: inline-block;
+    }
 
     .footer-section { text-align: center; margin-bottom: 40px; }
     .company-stamp { font-size: 20px; font-weight: 900; color: var(--primary-navy); margin-bottom: 15px; letter-spacing: -0.5px; }
@@ -108,7 +131,6 @@
 </div>
 
 <script>
-  // 날짜 초기화 로직
   const ms = document.getElementById('m'), ds = document.getElementById('d'), now = new Date();
   for(let i=1; i<=12; i++) {
     let o = document.createElement('option'); o.value=i; o.text=i;
@@ -123,13 +145,11 @@
   }
   ms.onchange = updateDays; updateDays();
 
-  // 📸 저장 함수
   async function saveAsImage() {
     const canvasArea = document.getElementById('document-canvas');
     const allInputs = canvasArea.querySelectorAll('input, select');
     const records = [];
 
-    // 1. 캡처 전: 모든 입력창을 글자로 임시 교체
     allInputs.forEach(el => {
       const val = el.value || "";
       const isDate = el.parentElement.classList.contains('date-wrap');
@@ -141,12 +161,11 @@
       else span.className = 'fix-text';
       
       span.innerText = val;
-      el.style.display = 'none'; // 기존창 숨김
+      el.style.display = 'none';
       el.parentNode.insertBefore(span, el);
       records.push({ el, span });
     });
 
-    // 2. 캡처 실행
     setTimeout(() => {
       html2canvas(canvasArea, { 
         scale: 2, 
@@ -158,7 +177,6 @@
         link.href = canvas.toDataURL('image/jpeg', 0.95);
         link.click();
 
-        // 3. 캡처 후 원상복구
         records.forEach(item => {
           item.span.remove();
           item.el.style.display = '';
