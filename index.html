@@ -11,7 +11,7 @@
       --primary-navy: #0d2f52;
       --table-border: #0d2f52;
       --label-bg: #f8fafc;
-      --input-height: 52px;
+      --input-height: 50px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,37 +24,39 @@
     }
 
     .content-area { padding: 190px 40px 80px; }
-    .doc-title { font-size: 32px; font-weight: 900; color: var(--primary-navy); text-align: center; margin-bottom: 35px; letter-spacing: -1.5px; }
+    .doc-title { font-size: 30px; font-weight: 900; color: var(--primary-navy); text-align: center; margin-bottom: 30px; letter-spacing: -1.5px; }
 
-    .data-table { width: 100%; border: 3px solid var(--table-border); background: rgba(255, 255, 255, 0.95); margin-bottom: 30px; }
+    .data-table { width: 100%; border: 3px solid var(--table-border); background: rgba(255, 255, 255, 0.98); margin-bottom: 25px; }
     .row { display: flex; border-bottom: 1.5px solid var(--table-border); min-height: var(--input-height); }
     .row:last-child { border-bottom: none; }
 
     .label {
-      flex: 0 0 120px; background: var(--label-bg); color: var(--primary-navy); font-weight: 700; font-size: 15px;
+      flex: 0 0 110px; background: var(--label-bg); color: var(--primary-navy); font-weight: 700; font-size: 15px;
       display: flex; align-items: center; justify-content: center; border-right: 1.5px solid var(--table-border);
     }
 
-    .input-box { flex: 1; padding: 0 20px; display: flex; align-items: center; height: var(--input-height); }
-    .input-box input, .input-box select, .capture-span {
-      width: 100%; border: none; background: transparent; font-size: 17px; outline: none; font-family: inherit;
-      color: #1a1a1a; height: 100%; display: flex; align-items: center;
+    .input-box { flex: 1; padding: 0 15px; display: flex; align-items: center; min-height: var(--input-height); }
+    .input-box input, .input-box select, .fix-text {
+      width: 100%; border: none; background: transparent; font-size: 16px; outline: none; font-family: inherit;
+      color: #111; height: 100%; display: flex; align-items: center;
     }
 
-    .legal-notice { font-size: 14px; line-height: 1.8; color: #444; margin-bottom: 40px; word-break: keep-all; }
-    .date-wrap { text-align: center; margin-bottom: 40px; font-size: 18px; font-weight: 700; }
-    .date-wrap select, .date-span { border: none; border-bottom: 2px solid #333; font-size: 18px; font-weight: 700; background: transparent; margin: 0 5px; }
+    .legal-notice { font-size: 13px; line-height: 1.7; color: #555; margin-bottom: 35px; word-break: keep-all; }
+    
+    /* 날짜 영역 고정 */
+    .date-wrap { text-align: center; margin-bottom: 35px; font-size: 18px; font-weight: 700; color: #222; }
+    .date-wrap select, .date-fix { border: none; border-bottom: 2px solid #333; font-size: 18px; font-weight: 800; background: transparent; margin: 0 4px; padding: 0 5px; text-align: center; }
 
     .footer-section { text-align: center; margin-bottom: 40px; }
-    .company-stamp { font-size: 21px; font-weight: 900; color: var(--primary-navy); margin-bottom: 15px; }
+    .company-stamp { font-size: 20px; font-weight: 900; color: var(--primary-navy); margin-bottom: 15px; letter-spacing: -0.5px; }
     
-    .resp-input-wrap { display: inline-flex; align-items: center; gap: 5px; border-bottom: 1.5px solid #333; width: 200px; padding-bottom: 5px; min-height: 30px; }
-    .resp-input-wrap input, .resp-span { border: none; outline: none; font-size: 15px; width: 100%; font-weight: 700; text-align: center; background: transparent; }
+    .resp-input-wrap { display: inline-flex; align-items: center; gap: 8px; border-bottom: 1.5px solid #333; width: 220px; padding-bottom: 4px; }
+    .resp-input-wrap input, .resp-fix { border: none; outline: none; font-size: 15px; width: 100%; font-weight: 700; text-align: center; background: transparent; }
 
     .btn-save-container { width: 100%; max-width: 650px; margin: 20px auto; padding: 0 10px; }
     .btn-save {
-      width: 100%; padding: 22px; background: #c2410c; color: white; border: none; font-size: 20px; font-weight: 800;
-      border-radius: 8px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      width: 100%; padding: 20px; background: #c2410c; color: white; border: none; font-size: 18px; font-weight: 800;
+      border-radius: 8px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
   </style>
 </head>
@@ -65,42 +67,63 @@
     <h1 class="doc-title">개인정보 수집 및 이용 동의서</h1>
 
     <div class="data-table">
-      <div class="row"><div class="label">성 명</div><div class="input-box"><input type="text" placeholder="성함"></div></div>
+      <div class="row"><div class="label">성 명</div><div class="input-box"><input type="text" placeholder="성함 입력"></div></div>
       <div class="row"><div class="label">연 락 처</div><div class="input-box"><input type="tel" placeholder="010-0000-0000"></div></div>
-      <div class="row"><div class="label">나 이</div><div class="input-box"><select><option value="">나이대 선택</option><option>20대</option><option>30대</option><option>40대</option><option>50대</option><option>60대 이상</option></select></div></div>
+      <div class="row">
+        <div class="label">나 이 / 성별</div>
+        <div class="input-box">
+          <select style="width:50%"><option value="">나이 선택</option><option>20대</option><option>30대</option><option>40대</option><option>50대</option><option>60대 이상</option></select>
+          <select style="width:50%"><option value="">성별</option><option>남성</option><option>여성</option></select>
+        </div>
+      </div>
       <div class="row">
         <div class="label">거 주 지</div>
         <div class="input-box">
           <select>
-            <option value="">지역 선택 (전국 상세)</option>
-            <optgroup label="서울특별시"><option>강남구</option><option>강동구</option><option>강북구</option><option>강서구</option><option>관악구</option><option>광진구</option><option>구로구</option><option>금천구</option><option>노원구</option><option>도봉구</option><option>동대문구</option><option>동작구</option><option>마포구</option><option>서대문구</option><option>서초구</option><option>성동구</option><option>성북구</option><option>송파구</option><option>양천구</option><option>영등포구</option><option>용산구</option><option>은평구</option><option>종로구</option><option>중구</option><option>중랑구</option></optgroup>
-            <optgroup label="경기도"><option>수원시</option><option>성남시</option><option>고양시</option><option>용인시</option><option>부천시</option><option>안산시</option><option>안양시</option><option>남양주시</option><option>화성시</option><option>평택시</option><option>의정부시</option><option>시흥시</option><option>파주시</option><option>광명시</option><option>김포시</option><option>군포시</option><option>광주시</option><option>이천시</option><option>양주시</option><option>오산시</option><option>구리시</option><option>안성시</option><option>포천시</option><option>의왕시</option><option>하남시</option><option>여주시</option><option>양평군</option><option>동두천시</option><option>과천시</option><option>가평군</option><option>연천군</option></optgroup>
-            <option>그 외 기타 지역</option>
+            <option value="">거주 지역(도 단위) 선택</option>
+            <option>서울특별시</option><option>경기도</option><option>인천광역시</option><option>강원특별자치도</option>
+            <option>충청북도</option><option>충청남도</option><option>대전광역시</option><option>세종특별자치시</option>
+            <option>전라북도</option><option>전라남도</option><option>광주광역시</option><option>경상북도</option>
+            <option>경상남도</option><option>부산광역시</option><option>대구광역시</option><option>울산광역시</option><option>제주특별자치도</option>
           </select>
         </div>
       </div>
-      <div class="row"><div class="label">투자기간</div><div class="input-box"><select><option value="">선택</option><option>1년 미만</option><option>1년~3년</option><option>3년~5년</option><option>5년 이상</option></select></div></div>
-      <div class="row"><div class="label">투자금액</div><div class="input-box"><select><option value="">선택</option><option>1천만원 이하</option><option>5천만원 이하</option><option>1억원 이하</option><option>1억원 이상</option></select></div></div>
-      <div class="row"><div class="label">보유종목</div><div class="input-box"><input type="text" placeholder="예: 삼성전자"></div></div>
-      <div class="row"><div class="label">수익현황</div><div class="input-box"><input type="text" placeholder="예: 수익중"></div></div>
+      <div class="row">
+        <div class="label">투자기간</div>
+        <div class="input-box"><select><option value="">선택</option><option>1년 미만</option><option>1년~3년</option><option>3년~5년</option><option>5년 이상</option></select></div>
+      </div>
+      <div class="row">
+        <div class="label">투자금액</div>
+        <div class="input-box"><select><option value="">선택</option><option>1천만원 이하</option><option>5천만원 이하</option><option>1억원 이하</option><option>1억원 이상</option></select></div>
+      </div>
+      <div class="row"><div class="label">보유종목</div><div class="input-box"><input type="text" placeholder="예: 삼성전자, 비트코인"></div></div>
+      <div class="row"><div class="label">수익현황</div><div class="input-box"><input type="text" placeholder="예: 수익중(+10%)"></div></div>
     </div>
 
-    <div class="legal-notice">블랙록자산운용은 개인정보 보호법 제30조에 따라 정보 주체(고객)의 개인정보 및 권익을 보호하고, 
-        본 동의서를 통해 수집된 개인정보는 블랙록의 개인별 맞춤 투자 플랜에 참고 자료로 등록됨을 안내 드립니다.</div>
+    <div class="legal-notice">
+      본인은 블랙록자산운용이 제공하는 서비스 이용을 위해 개인정보보호법에 의거하여 위와 같이 개인정보를 수집 및 이용하는 것에 동의합니다. 수집된 정보는 목적 외 용도로 사용되지 않습니다.
+    </div>
 
-    <div class="date-wrap">2026년 <select id="m"></select>월 <select id="d"></select>일</div>
+    <div class="date-wrap">
+      2026년 <select id="m"></select>월 <select id="d"></select>일
+    </div>
 
     <div class="footer-section">
       <div class="company-stamp">블랙록자산운용주식회사 (비상장)</div>
-      <div class="resp-input-wrap"><span style="font-size:14px; color:#555;">작성책임자:</span><input type="text" placeholder="성함"></div>
+      <div class="resp-input-wrap">
+        <span style="font-size:14px; color:#444;">작성책임자:</span>
+        <input type="text" placeholder="성함 입력">
+      </div>
     </div>
   </div>
 </div>
 
-<div class="btn-save-container"><button type="button" class="btn-save" onclick="saveAsImage()">동의서 이미지 저장 (캡처)</button></div>
+<div class="btn-save-container">
+  <button type="button" class="btn-save" onclick="saveAsImage()">동의서 이미지 저장 (오류 해결판)</button>
+</div>
 
 <script>
-  // [날짜 로직]
+  // 날짜 초기화
   const ms = document.getElementById('m'), ds = document.getElementById('d'), now = new Date();
   for(let i=1; i<=12; i++) {
     let o = document.createElement('option'); o.value=i; o.text=i;
@@ -115,36 +138,50 @@
   }
   ms.onchange = updateDays; updateDays();
 
-  // [📸 이미지 저장 핵심 로직: 전환 -> 캡처 -> 복구]
+  // 📸 이미지 저장 핵심 (전환 -> 캡처 -> 복구)
   async function saveAsImage() {
     const canvasArea = document.getElementById('document-canvas');
-    const inputs = canvasArea.querySelectorAll('input, select');
-    const placeholders = [];
+    const allInputs = canvasArea.querySelectorAll('input, select');
+    const records = [];
 
-    // 1️⃣ 캡처 전: 모든 input/select를 span으로 교체
-    inputs.forEach(el => {
-      const val = el.value || el.placeholder || "";
+    // 1. 캡처 전: 모든 입력창을 글자로 박아버리기
+    allInputs.forEach(el => {
+      const val = el.value || "";
+      const isDate = el.parentElement.classList.contains('date-wrap');
+      const isResp = el.parentElement.classList.contains('resp-input-wrap');
+      
       const span = document.createElement('span');
-      span.className = el.tagName === 'SELECT' ? 'capture-span' : (el.parentElement.className === 'date-wrap' ? 'date-span' : (el.parentElement.className === 'resp-input-wrap' ? 'resp-span' : 'capture-span'));
+      // 스타일 클래스 적용
+      if(isDate) span.className = 'date-fix';
+      else if(isResp) span.className = 'resp-fix';
+      else span.className = 'fix-text';
+      
       span.innerText = val;
       el.style.display = 'none';
       el.parentNode.insertBefore(span, el);
-      placeholders.push({ el, span });
+      records.push({ el, span });
     });
 
-    // 2️⃣ 캡처 실행 (고해상도 2배)
-    html2canvas(canvasArea, { scale: 2, useCORS: true, backgroundColor: "#ffffff" }).then(canvas => {
-      const link = document.createElement('a');
-      link.download = '블랙록_동의서_' + new Date().getTime() + '.jpg';
-      link.href = canvas.toDataURL('image/jpeg', 0.9);
-      link.click();
+    // 2. 캡처 (지연 시간 0.1초 줘서 렌더링 안정화)
+    setTimeout(() => {
+      html2canvas(canvasArea, { 
+        scale: 2, 
+        useCORS: true, 
+        backgroundColor: "#ffffff",
+        logging: false
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = '블랙록_동의서_' + new Date().getTime() + '.jpg';
+        link.href = canvas.toDataURL('image/jpeg', 0.95);
+        link.click();
 
-      // 3️⃣ 캡처 후: span 삭제하고 원래 input/select 다시 표시 (원상복구)
-      placeholders.forEach(item => {
-        item.span.remove();
-        item.el.style.display = '';
+        // 3. 캡처 후 원상복구
+        records.forEach(item => {
+          item.span.remove();
+          item.el.style.display = '';
+        });
       });
-    });
+    }, 100);
   }
 </script>
 </body>
