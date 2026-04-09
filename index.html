@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>블랙록 개인정보 동의서 | BlackRock</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    /* 🎨 브랜드 컬러 및 디자인 시스템 */
+    /* 🎨 브랜드 컬러 시스템 */
     :root {
-      --navy: #0d2f52;
-      --navy-dark: #082441;
-      --table-border: #0d2f52;
-      --gray-bg: #f8fafc;
+      --primary-navy: #0d2f52;
+      --border-color: #0d2f52;
+      --label-bg: #f8fafc;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -26,13 +25,13 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* 🛡️ 문서 전체 컨테이너: 배경은 여기에 깔립니다 */
-    .doc-page {
+    /* 전체 컨테이너: 배경 이미지를 여기에 깔아줍니다 */
+    .document-page {
       width: 100%;
       max-width: 650px;
       margin: 0 auto;
       background-color: #fff;
-      box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       position: relative;
       overflow: hidden;
 
@@ -44,58 +43,56 @@
     }
 
     /* 📝 실제 폼 내용이 올라가는 레이어 */
-    .form-wrapper {
+    .content-area {
       /* ✅ 핵심: 상단 여백은 패턴에 맞추고, 하단 여백을 대폭 확보하여 
          제출 버튼이 하단 무늬보다 더 위에서 끝나게 합니다 */
-      padding: 190px 40px calc(100% * calc(320 / 650)); /* 하단 패턴 비율만큼 높이 확보 */
+      padding: 190px 30px 100px; /* 맨 밑 무늬 공간 확보 */
       flex: 1;
       display: flex;
       flex-direction: column;
     }
 
     .doc-title {
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 900;
-      color: var(--navy);
+      color: var(--primary-navy);
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 35px;
       letter-spacing: -1.5px;
     }
 
     /* 📊 테이블 디자인: 고퀄리티 직선 스타일 */
     .data-table {
       width: 100%;
-      border: 3px solid var(--table-border);
+      border: 3px solid var(--border-color);
       background: rgba(255, 255, 255, 0.95); /* 배경 대비 */
-      backdrop-filter: blur(3px); /* 미세 흐림 효과 */
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
 
     .row {
       display: flex;
-      border-bottom: 1.5px solid var(--table-border);
+      border-bottom: 1.5px solid var(--border-color);
       min-height: 58px;
     }
 
     .row:last-child { border-bottom: none; }
 
     .label {
-      flex: 0 0 120px;
-      background: var(--gray-bg);
-      color: var(--navy);
+      flex: 0 0 110px;
+      background: var(--label-bg);
+      color: var(--primary-navy);
       font-weight: 700;
-      font-size: 15px;
+      font-size: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-right: 1.5px solid var(--table-border);
+      border-right: 1.5px solid var(--border-color);
       text-align: center;
-      letter-spacing: 1px;
     }
 
     .input-box {
       flex: 1;
-      padding: 10px 20px;
+      padding: 10px 15px;
       display: flex;
       align-items: center;
     }
@@ -110,25 +107,23 @@
       color: #333;
     }
 
-    .input-box input::placeholder { color: #bbb; }
-
-    /* 법률 안내 문구 */
+    /* 안내 문구 */
     .legal-notice {
-      font-size: 14.5px;
+      font-size: 14px;
       line-height: 1.8;
       color: #444;
-      margin-bottom: 45px;
+      margin-bottom: 40px;
       word-break: keep-all;
     }
 
     /* 날짜 선택: 정밀 조정 */
-    .date-selection {
+    .date-wrap {
       text-align: center;
-      margin-bottom: 45px;
+      margin-bottom: 40px;
       font-size: 18px;
     }
 
-    .date-selection select {
+    .date-wrap select {
       border: none;
       border-bottom: 2px solid #333;
       font-weight: 700;
@@ -139,47 +134,44 @@
     }
 
     /* 하단 서명란 */
-    .signature-section {
+    .footer-section {
       text-align: center;
       margin-bottom: 50px;
     }
 
-    .company-name {
+    .comp-name {
       font-size: 20px;
       font-weight: 800;
-      color: var(--navy);
+      color: var(--primary-navy);
       margin-bottom: 15px;
     }
 
-    .manager-line {
+    .resp-line {
       display: inline-block;
       width: 200px;
       text-align: left;
-      border-bottom: 1px solid #333;
-      font-size: 14px;
+      border-bottom: 1px solid #000;
+      font-size: 15px;
       padding-bottom: 5px;
       color: #555;
     }
 
-    /* 버튼: 고퀄리티 직선 스타일 */
-    .submit-button {
+    /* 버튼: 직선적이고 신뢰감 있게 */
+    .btn-submit {
       width: 100%;
-      padding: 24px;
-      background: var(--navy);
+      padding: 22px;
+      background: var(--primary-navy);
       color: white;
       border: none;
       font-size: 19px;
       font-weight: 700;
-      border-radius: 4px; /* 둥근 정도 감소 */
+      border-radius: 4px; /* 직선 스타일 */
       cursor: pointer;
-      box-shadow: 0 5px 20px rgba(13, 47, 82, 0.2);
+      box-shadow: 0 5px 15px rgba(13, 47, 82, 0.2);
     }
 
-    .submit-button:active { background: var(--navy-dark); transform: scale(0.98); }
-
-    /* 모바일 반응형 */
     @media (max-width: 480px) {
-      .form-wrapper { padding-top: 150px; padding-left: 20px; padding-right: 20px; }
+      .content-area { padding-top: 150px; padding-left: 20px; padding-right: 20px; }
       .doc-title { font-size: 26px; }
       .label { flex: 0 0 95px; font-size: 13px; }
     }
@@ -187,8 +179,8 @@
 </head>
 <body>
 
-<div class="doc-page">
-  <div class="form-wrapper">
+<div class="document-page">
+  <div class="content-area">
     <h1 class="doc-title">블랙록 개인정보 동의서</h1>
 
     <form id="consentForm">
@@ -258,16 +250,16 @@
         본 방침은 관련 법령의 제·개정 및 회사의 운용방침에 따라 변경될 수 있으며, 변경시 개인매니저 및 블랙록 플랫폼 내부에서 확인 가능 합니다.
       </div>
 
-      <div class="date-selection">
+      <div class="date-wrap">
         <span>2026년</span> <select id="m"></select><span>월</span> <select id="d"></select><span>일</span>
       </div>
 
-      <div class="signature-section">
-        <div class="company-name">블랙록자산운용주식회사 (비상장)</div>
+      <div class="footer-section">
+        <div class="comp-name">블랙록자산운용주식회사 (비상장)</div>
         <div class="manager-line">작성책임자: </div>
       </div>
 
-      <button type="submit" class="submit-button">내용 확인 및 동의 완료</button>
+      <button type="submit" class="btn-submit">내용 확인 및 동의 완료</button>
     </form>
   </div>
 </div>
