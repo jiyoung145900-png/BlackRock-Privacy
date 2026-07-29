@@ -3,24 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BANADA · 1시간 추가 쿠폰</title>
+<title>BANADA · Special Luxury Voucher</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<!-- HTML2Canvas 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 <style>
   :root {
-    --bg: #0a0a0a;
-    --surface: #141414;
-    --coupon-bg: #0f0e0c;
-    --coupon-bg-2: #1a1712;
-    --gold: #c9a961;
-    --gold-bright: #e8c977;
-    --gold-dim: #8a7444;
-    --cream: #f5f0e6;
-    --cream-dim: #a8a196;
-    --line: rgba(201, 169, 97, 0.25);
-    --line-strong: rgba(201, 169, 97, 0.5);
+    --bg: #070605;
+    --coupon-bg-1: #12100d;
+    --coupon-bg-2: #1e1913;
+    --gold-bright: #f5e5ab;
+    --gold: #d4af37;
+    --gold-mid: #aa820a;
+    --gold-dark: #5e4500;
+    --cream: #fbf8f2;
+    --cream-dim: #a69f93;
+    --line: rgba(212, 175, 55, 0.28);
+    --line-strong: rgba(212, 175, 55, 0.55);
+    --edit-hover: rgba(212, 175, 55, 0.12);
+    --edit-active: rgba(212, 175, 55, 0.25);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,63 +40,131 @@
     justify-content: center;
     padding: 40px 20px;
     background-image: 
-      radial-gradient(circle at 20% 30%, rgba(201, 169, 97, 0.06) 0%, transparent 40%),
-      radial-gradient(circle at 80% 70%, rgba(201, 169, 97, 0.04) 0%, transparent 40%);
+      radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+      radial-gradient(circle at 20% 80%, rgba(170, 130, 10, 0.05) 0%, transparent 50%);
+    overflow-x: hidden;
   }
 
   .stage {
-    perspective: 1400px;
+    perspective: 1200px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 20px;
+    width: 100%;
+    max-width: 640px;
   }
 
-  /* ─── 쿠폰 컨테이너 ─── */
+  /* ─── 프리셋 영역 ─── */
+  .presets-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .presets {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .preset-btn {
+    padding: 8px 18px;
+    background: rgba(18, 16, 13, 0.8);
+    color: var(--cream-dim);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    backdrop-filter: blur(4px);
+  }
+
+  .preset-btn:hover {
+    color: var(--gold-bright);
+    border-color: var(--gold);
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
+    transform: translateY(-1px);
+  }
+
+  .preset-btn.active {
+    background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%);
+    color: #080705;
+    font-weight: 600;
+    border-color: var(--gold-bright);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+  }
+
+  /* ─── 쿠폰 본체 ─── */
+  .coupon-wrap {
+    width: 580px;
+    max-width: 100%;
+    position: relative;
+  }
+
   .coupon {
     position: relative;
-    width: 560px;
-    max-width: 100%;
-    background: linear-gradient(135deg, var(--coupon-bg) 0%, var(--coupon-bg-2) 100%);
+    width: 100%;
+    background: linear-gradient(135deg, var(--coupon-bg-1) 0%, var(--coupon-bg-2) 100%);
+    border-radius: 12px;
     display: grid;
-    grid-template-columns: 1fr 140px;
+    grid-template-columns: 1fr 145px;
     transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 40px rgba(201, 169, 97, 0.08));
-    /* 좌우 톱니 모양 */
+    transition: transform 0.15s ease-out;
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.8),
+      0 0 50px rgba(212, 175, 55, 0.12),
+      inset 0 0 0 1px rgba(212, 175, 55, 0.35);
+    
+    /* 타원형 펀칭 컷아웃 마스크 */
     -webkit-mask: 
-      radial-gradient(circle at 400px 0, transparent 8px, #000 8.5px) top,
-      radial-gradient(circle at 400px 100%, transparent 8px, #000 8.5px) bottom;
+      radial-gradient(circle at 435px 0, transparent 9px, #000 9.5px) top,
+      radial-gradient(circle at 435px 100%, transparent 9px, #000 9.5px) bottom;
     -webkit-mask-size: 100% 51%;
     -webkit-mask-repeat: no-repeat;
     mask: 
-      radial-gradient(circle at 400px 0, transparent 8px, #000 8.5px) top,
-      radial-gradient(circle at 400px 100%, transparent 8px, #000 8.5px) bottom;
+      radial-gradient(circle at 435px 0, transparent 9px, #000 9.5px) top,
+      radial-gradient(circle at 435px 100%, transparent 9px, #000 9.5px) bottom;
     mask-size: 100% 51%;
     mask-repeat: no-repeat;
   }
 
-  .coupon:hover {
-    transform: rotateY(-3deg) rotateX(2deg);
+  .coupon.no-tilt {
+    transform: none !important;
   }
 
-  /* 홀로그램 샤인 효과 */
+  /* 광택 오버레이 */
   .coupon::before {
     content: '';
     position: absolute;
     inset: 0;
+    border-radius: 12px;
     background: linear-gradient(
-      105deg,
-      transparent 30%,
-      rgba(232, 201, 119, 0.06) 45%,
-      rgba(232, 201, 119, 0.12) 50%,
-      rgba(232, 201, 119, 0.06) 55%,
-      transparent 70%
+      115deg,
+      transparent 25%,
+      rgba(245, 229, 171, 0.03) 40%,
+      rgba(245, 229, 171, 0.15) 50%,
+      rgba(245, 229, 171, 0.03) 60%,
+      transparent 75%
     );
-    background-size: 200% 100%;
-    animation: shine 6s ease-in-out infinite;
+    background-size: 250% 100%;
+    animation: shine 7s infinite ease-in-out;
     pointer-events: none;
-    z-index: 3;
+    z-index: 5;
   }
 
   @keyframes shine {
@@ -99,19 +172,18 @@
     50% { background-position: -100% 0; }
   }
 
-  /* ─── 메인 섹션 (좌측) ─── */
+  /* ─── 메인 섹션 ─── */
   .coupon-main {
-    padding: 36px 40px 32px;
+    padding: 34px 38px 28px;
     position: relative;
     border-right: 1px dashed var(--line-strong);
   }
 
-  /* 상단 헤더 */
   .coupon-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 32px;
+    align-items: center;
+    margin-bottom: 24px;
   }
 
   .brand {
@@ -121,201 +193,270 @@
   }
 
   .logo-mark {
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 50%, var(--gold-dim) 100%);
+    background: linear-gradient(135deg, #f5e5ab 0%, #d4af37 60%, #8a6f14 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: 22px;
-    color: #1a1712;
-    letter-spacing: -0.02em;
-    box-shadow: 0 2px 8px rgba(201, 169, 97, 0.3);
-    /* 이미지 로고로 교체하려면: background-image: url('logo.png'); background-size: cover; */
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #0d0b08;
+    box-shadow: 0 2px 10px rgba(212, 175, 55, 0.4);
+    flex-shrink: 0;
   }
 
   .brand-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 500;
-    font-size: 24px;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 22px;
     letter-spacing: 0.28em;
-    color: var(--gold);
+    color: var(--gold-bright);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   }
 
   .coupon-type {
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.3em;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
     color: var(--cream-dim);
     text-transform: uppercase;
-    padding-top: 8px;
     text-align: right;
-    line-height: 1.6;
+    line-height: 1.5;
   }
 
   .coupon-type strong {
     display: block;
     color: var(--gold);
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 11px;
   }
 
-  /* 중앙 콘텐츠 */
   .coupon-body {
-    padding: 20px 0 16px;
+    padding: 10px 0;
   }
 
   .eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    font-family: 'Inter', sans-serif;
+    gap: 8px;
+    font-family: 'Cinzel', serif;
     font-size: 10px;
-    letter-spacing: 0.35em;
+    letter-spacing: 0.3em;
     color: var(--gold);
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
 
-  .eyebrow::before,
-  .eyebrow::after {
+  .eyebrow::before, .eyebrow::after {
     content: '';
-    width: 24px;
+    width: 20px;
     height: 1px;
-    background: var(--gold-dim);
+    background: var(--gold-mid);
+  }
+
+  .value-line {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
   }
 
   .value {
     font-family: 'Pretendard Variable', sans-serif;
-    font-weight: 700;
-    font-size: 88px;
-    line-height: 0.95;
-    letter-spacing: -0.04em;
-    color: var(--cream);
-    margin-bottom: 12px;
-    background: linear-gradient(180deg, var(--cream) 0%, #d4c8a8 100%);
+    font-weight: 800;
+    font-size: 58px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    background: linear-gradient(180deg, #ffffff 0%, #f5e5ab 60%, #c29f28 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
   }
 
-  .value .unit {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-style: italic;
-    font-size: 44px;
-    color: var(--gold);
-    -webkit-text-fill-color: var(--gold);
-    margin-left: 4px;
-    vertical-align: 12px;
+  .unit {
+    font-family: 'Pretendard Variable', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--gold-bright);
   }
 
   .subtitle {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--cream-dim);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.02em;
+    font-weight: 300;
+    line-height: 1.4;
   }
 
-  /* 하단 메타 정보 */
+  /* ─── 하단 날짜 메타 ─── */
   .coupon-meta {
-    margin-top: 32px;
-    padding-top: 20px;
+    margin-top: 24px;
+    padding-top: 16px;
     border-top: 1px solid var(--line);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 16px;
   }
 
   .meta-item {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
   }
 
   .meta-label {
-    font-family: 'Inter', sans-serif;
-    font-size: 9px;
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
     letter-spacing: 0.25em;
-    color: var(--cream-dim);
+    color: var(--gold-mid);
     text-transform: uppercase;
   }
 
   .meta-value {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
+    font-size: 12px;
     color: var(--cream);
     font-weight: 500;
-    letter-spacing: 0.02em;
   }
 
-  /* ─── 스텁 섹션 (우측) ─── */
+  /* ─── 편집 상태 ─── */
+  .editable {
+    transition: all 0.2s ease;
+    outline: 1px dashed transparent;
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  body.edit-mode .editable {
+    outline-color: var(--line-strong);
+    background: var(--edit-hover);
+    cursor: text;
+  }
+
+  body.edit-mode .editable:hover {
+    outline-color: var(--gold);
+    background: var(--edit-active);
+  }
+
+  body.edit-mode .editable:focus {
+    outline: 1px dashed var(--gold-bright);
+    background: var(--edit-active);
+    -webkit-text-fill-color: var(--cream);
+    color: var(--cream);
+  }
+
+  /* ─── 우측 스텁 (Stub) ─── */
   .coupon-stub {
-    padding: 24px 16px;
+    padding: 24px 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background: linear-gradient(180deg, rgba(201, 169, 97, 0.03) 0%, transparent 100%);
+    background: rgba(212, 175, 55, 0.02);
     position: relative;
   }
 
-  .stub-label {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    font-style: italic;
-    font-size: 14px;
-    letter-spacing: 0.4em;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
-
-  .stub-code {
+  .stub-seal {
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--gold-mid);
+    border-radius: 50%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    box-shadow: inset 0 0 8px rgba(212, 175, 55, 0.2);
   }
 
-  .code-number {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--cream-dim);
-    letter-spacing: 0.1em;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
+  .stub-seal-inner {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold-bright);
+    letter-spacing: 1px;
   }
 
   .barcode {
     display: flex;
     gap: 2px;
-    height: 60px;
+    height: 50px;
     align-items: center;
+    opacity: 0.85;
   }
 
   .barcode span {
     display: block;
     width: 2px;
     background: var(--cream);
-    opacity: 0.85;
   }
 
-  .stub-emblem {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 32px;
-    font-weight: 400;
+  .code-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--cream-dim);
+    letter-spacing: 0.1em;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .stub-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
     color: var(--gold);
-    line-height: 1;
-    font-style: italic;
+    text-transform: uppercase;
   }
 
-  /* ─── 컨트롤 (버튼 영역) ─── */
+  /* ─── 조작 버튼 및 날짜 퀵 선택기 ─── */
+  .controls-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .date-quick-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(18, 16, 13, 0.6);
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+  }
+
+  .quick-label {
+    font-size: 11px;
+    color: var(--cream-dim);
+    margin-right: 4px;
+  }
+
+  .quick-btn {
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 11px;
+    font-family: 'Pretendard Variable', sans-serif;
+    cursor: pointer;
+    padding: 3px 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+
+  .quick-btn:hover {
+    background: rgba(212, 175, 55, 0.15);
+    color: var(--gold-bright);
+  }
+
   .controls {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -329,70 +470,77 @@
     font-family: 'Pretendard Variable', sans-serif;
     font-size: 13px;
     font-weight: 500;
-    letter-spacing: 0.05em;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
 
   .btn:hover {
     background: var(--gold);
-    color: #0a0a0a;
+    color: #080705;
     border-color: var(--gold);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
   }
 
   .btn-primary {
-    background: var(--gold);
-    color: #0a0a0a;
-    border-color: var(--gold);
+    background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%);
+    color: #080705;
+    font-weight: 600;
+    border-color: var(--gold-bright);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
   }
 
   .btn-primary:hover {
-    background: var(--gold-bright);
-    border-color: var(--gold-bright);
+    filter: brightness(1.1);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
   }
 
-  /* ─── 반응형 ─── */
+  .btn.active {
+    background: var(--gold);
+    color: #080705;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--gold-bright);
+    color: #080705;
+    padding: 12px 28px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 100;
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
   @media (max-width: 600px) {
     .coupon {
-      width: 100%;
-      grid-template-columns: 1fr 100px;
+      grid-template-columns: 1fr 110px;
       -webkit-mask: 
-        radial-gradient(circle at calc(100% - 100px) 0, transparent 7px, #000 7.5px) top,
-        radial-gradient(circle at calc(100% - 100px) 100%, transparent 7px, #000 7.5px) bottom;
+        radial-gradient(circle at calc(100% - 110px) 0, transparent 8px, #000 8.5px) top,
+        radial-gradient(circle at calc(100% - 110px) 100%, transparent 8px, #000 8.5px) bottom;
       -webkit-mask-size: 100% 51%;
-      -webkit-mask-repeat: no-repeat;
       mask: 
-        radial-gradient(circle at calc(100% - 100px) 0, transparent 7px, #000 7.5px) top,
-        radial-gradient(circle at calc(100% - 100px) 100%, transparent 7px, #000 7.5px) bottom;
+        radial-gradient(circle at calc(100% - 110px) 0, transparent 8px, #000 8.5px) top,
+        radial-gradient(circle at calc(100% - 110px) 100%, transparent 8px, #000 8.5px) bottom;
       mask-size: 100% 51%;
-      mask-repeat: no-repeat;
     }
-    .coupon-main { padding: 28px 24px 24px; }
-    .value { font-size: 64px; }
-    .value .unit { font-size: 32px; }
-    .brand-name { font-size: 18px; letter-spacing: 0.2em; }
-    .coupon-header { margin-bottom: 24px; }
-    .coupon-stub { padding: 20px 8px; }
-    .stub-label { font-size: 11px; }
-    .barcode { height: 40px; }
-  }
-
-  /* ─── 인쇄용 ─── */
-  @media print {
-    body { background: white; padding: 0; }
-    .controls { display: none; }
-    .coupon { filter: none; box-shadow: none; }
-    .coupon::before { display: none; }
-  }
-
-  /* 페이드인 애니메이션 */
-  .coupon {
-    animation: fadeUp 0.9s cubic-bezier(0.23, 1, 0.32, 1) both;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    .coupon-main { padding: 24px 20px 20px; }
+    .value { font-size: 42px; }
+    .unit { font-size: 24px; }
+    .brand-name { font-size: 16px; }
+    .coupon-stub { padding: 18px 8px; }
   }
 </style>
 </head>
@@ -400,67 +548,184 @@
 
 <div class="stage">
 
-  <!-- ═══ 쿠폰 본체 ═══ -->
-  <div class="coupon" id="coupon">
-    
-    <!-- 좌측 메인 -->
-    <div class="coupon-main">
-      
-      <!-- 헤더: 로고 + 쿠폰 타입 -->
-      <div class="coupon-header">
-        <div class="brand">
-          <!-- 로고 마크: 이미지로 교체하려면 <img>로 바꾸면 됨 -->
-          <div class="logo-mark">B</div>
-          <div class="brand-name">BANADA</div>
-        </div>
-        <div class="coupon-type">
-          Special Event<br>
-          <strong>Coupon</strong>
-        </div>
-      </div>
-
-      <!-- 메인 밸류 -->
-      <div class="coupon-body">
-        <div class="eyebrow">Complimentary Gift</div>
-        <div class="value">1<span class="unit">시간 추가</span></div>
-        <div class="subtitle">고객님의 특별한 순간을 위해 준비했습니다</div>
-      </div>
-
-      <!-- 메타 정보 (발급일 / 유효기간) -->
-      <div class="coupon-meta">
-        <div class="meta-item">
-          <div class="meta-label">Issued Date</div>
-          <div class="meta-value" id="issued-date">—</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-label">Valid Until</div>
-          <div class="meta-value" id="valid-until">—</div>
-        </div>
-      </div>
+  <!-- 프리셋 선택 바 -->
+  <div class="presets-wrapper">
+    <div class="section-title">Select Benefit Type</div>
+    <div class="presets">
+      <button class="preset-btn active" data-preset="hour">1시간 추가</button>
+      <button class="preset-btn" data-preset="meet">1회 만남 무료</button>
+      <button class="preset-btn" data-preset="stocking">스타킹 무료</button>
+      <button class="preset-btn" data-preset="option">옵션 1개 무료</button>
+      <button class="preset-btn" data-preset="cosplay">코스프레 무료</button>
     </div>
-
-    <!-- 우측 스텁 -->
-    <div class="coupon-stub">
-      <div class="stub-emblem">B</div>
-      <div class="barcode" id="barcode"></div>
-      <div class="stub-code">
-        <div class="code-number" id="coupon-code">NO. —</div>
-      </div>
-      <div class="stub-label">Admit One</div>
-    </div>
-
   </div>
 
-  <!-- 컨트롤 버튼 -->
-  <div class="controls">
-    <button class="btn" onclick="window.print()">인쇄하기</button>
-    <button class="btn btn-primary" onclick="regenerate()">새 쿠폰 발급</button>
+  <!-- 쿠폰 본체 -->
+  <div class="coupon-wrap" id="coupon-wrap">
+    <div class="coupon" id="coupon">
+      
+      <!-- 쿠폰 메인 -->
+      <div class="coupon-main">
+        <div class="coupon-header">
+          <div class="brand">
+            <div class="logo-mark">B</div>
+            <div class="brand-name editable" contenteditable="false">BANADA</div>
+          </div>
+          <div class="coupon-type">
+            <span class="editable" contenteditable="false">Special Voucher</span><br>
+            <strong class="editable" contenteditable="false">VIP PRIVILEGE</strong>
+          </div>
+        </div>
+
+        <div class="coupon-body">
+          <div class="eyebrow editable" contenteditable="false">Complimentary Gift</div>
+          <div class="value-line">
+            <span class="value editable" contenteditable="false" id="val-num">1</span>
+            <span class="unit editable" contenteditable="false" id="val-unit">시간 추가</span>
+          </div>
+          <div class="subtitle editable" contenteditable="false" id="val-sub">고객님의 특별한 순간을 위해 준비했습니다</div>
+        </div>
+
+        <div class="coupon-meta">
+          <div class="meta-item">
+            <div class="meta-label">Issued Date</div>
+            <div class="meta-value editable" contenteditable="false" id="issued-date">—</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Valid Until</div>
+            <div class="meta-value editable" contenteditable="false" id="valid-until">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 쿠폰 스텁 -->
+      <div class="coupon-stub">
+        <div class="stub-seal">
+          <span class="stub-seal-inner">VIP</span>
+        </div>
+        <div class="barcode" id="barcode"></div>
+        <div class="code-number" id="coupon-code">NO. —</div>
+        <div class="stub-label">Admit One</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 액션 패널 -->
+  <div class="controls-panel">
+    <!-- 유효기간 빠른 변경 -->
+    <div class="date-quick-bar">
+      <span class="quick-label">유효기간 연장:</span>
+      <button class="quick-btn" onclick="setExpiryDays(30)">+30일</button>
+      <button class="quick-btn" onclick="setExpiryDays(60)">+60일</button>
+      <button class="quick-btn" onclick="setExpiryDays(90)">+90일</button>
+      <button class="quick-btn" onclick="setExpiryUnlimited()">무제한</button>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="edit-btn" onclick="toggleEdit()">✎ 글자/날짜 직접 수정</button>
+      <button class="btn" onclick="regenerate()">↻ 번호재발급</button>
+      <button class="btn btn-primary" onclick="downloadCoupon()">⬇ 이미지 다운로드</button>
+    </div>
   </div>
 
 </div>
 
+<div class="toast" id="toast">다운로드 완료 ✓</div>
+
 <script>
-  // ─── 날짜 & 쿠폰 코드 자동 생성 ───
+  // ═════════════════════════════════════════
+  // 1. 프리셋 설정
+  // ═════════════════════════════════════════
+  const PRESETS = {
+    hour:     { num: '1',      unit: '시간 추가',  sub: '고객님의 특별한 순간을 위해 여유시간을 선물합니다', eyebrow: 'Complimentary Gift' },
+    meet:     { num: '1회',    unit: '만남 무료',  sub: '소중한 하루를 위해 준비한 특별한 무료 이용권입니다', eyebrow: 'Special Privilege' },
+    stocking: { num: '스타킹', unit: '무료 제공', sub: '원하시는 스타일의 고급 스타킹 옵션이 무료 제공됩니다', eyebrow: 'Free Option' },
+    option:   { num: '옵션 1개', unit: '무료',     sub: '원하시는 어디서든 맞춤형 옵션 1가지를 무료 선택하세요', eyebrow: 'Choice Voucher' },
+    cosplay:  { num: '코스프레', unit: '무료 이용', sub: '다채로운 연출을 위한 테마 의상 옵션을 제공합니다', eyebrow: 'Special Theme' }
+  };
+
+  // ═════════════════════════════════════════
+  // 2. 3D 틸트 (마우스 이동 시 카드 기울임)
+  // ═════════════════════════════════════════
+  const couponWrap = document.getElementById('coupon-wrap');
+  const coupon = document.getElementById('coupon');
+
+  couponWrap.addEventListener('mousemove', (e) => {
+    if (editMode || coupon.classList.contains('no-tilt')) return;
+    const rect = couponWrap.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    
+    const rotateX = (-y / rect.height) * 14;
+    const rotateY = (x / rect.width) * 14;
+
+    coupon.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+
+  couponWrap.addEventListener('mouseleave', () => {
+    coupon.style.transform = 'rotateX(0deg) rotateY(0deg)';
+  });
+
+  // ═════════════════════════════════════════
+  // 3. 편집 모드 제어 (날짜 포함 전체 텍스트 편집)
+  // ═════════════════════════════════════════
+  let editMode = false;
+
+  function toggleEdit() {
+    editMode = !editMode;
+    document.body.classList.toggle('edit-mode', editMode);
+    
+    const editBtn = document.getElementById('edit-btn');
+    editBtn.classList.toggle('active', editMode);
+    editBtn.textContent = editMode ? '✓ 편집 완료' : '✎ 글자/날짜 직접 수정';
+
+    document.querySelectorAll('.editable').forEach(el => {
+      el.setAttribute('contenteditable', editMode ? 'true' : 'false');
+    });
+
+    if (editMode) {
+      coupon.style.transform = 'none';
+      showToast('쿠폰 위 원하는 글자/날짜를 직접 클릭해서 수정하세요!');
+    } else {
+      showToast('수정이 완료되었습니다');
+    }
+  }
+
+  // 엔터키 줄바꿈 제한
+  document.addEventListener('keydown', (e) => {
+    if (e.target.classList.contains('editable') && e.key === 'Enter') {
+      if (!e.target.classList.contains('subtitle')) {
+        e.preventDefault();
+        e.target.blur();
+      }
+    }
+  });
+
+  // ═════════════════════════════════════════
+  // 4. 프리셋 클릭 처리
+  // ═════════════════════════════════════════
+  document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const presetKey = btn.dataset.preset;
+      const preset = PRESETS[presetKey];
+      if (!preset) return;
+
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.getElementById('val-num').textContent = preset.num;
+      document.getElementById('val-unit').textContent = preset.unit;
+      document.getElementById('val-sub').textContent = preset.sub;
+      document.querySelector('.eyebrow').textContent = preset.eyebrow;
+    });
+  });
+
+  // ═════════════════════════════════════════
+  // 5. 날짜 처리 & 코드 생성
+  // ═════════════════════════════════════════
+  let currentIssuedDate = new Date();
+
   function formatDate(d) {
     const y = d.getFullYear();
     const m = String(d.getMonth() + 1).padStart(2, '0');
@@ -468,8 +733,19 @@
     return `${y}.${m}.${day}`;
   }
 
+  function setExpiryDays(days) {
+    const expiry = new Date(currentIssuedDate);
+    expiry.setDate(expiry.getDate() + days);
+    document.getElementById('valid-until').textContent = formatDate(expiry);
+    showToast(`유효기간이 +${days}일 설정되었습니다`);
+  }
+
+  function setExpiryUnlimited() {
+    document.getElementById('valid-until').textContent = '상시 유효 (NO EXPIRY)';
+    showToast('유효기간이 무제한으로 설정되었습니다');
+  }
+
   function generateCouponCode() {
-    // 예: BND-A3F2-7K9M
     const chars = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
     let code = 'BND-';
     for (let i = 0; i < 4; i++) code += chars[Math.floor(Math.random() * chars.length)];
@@ -479,38 +755,92 @@
   }
 
   function generateBarcode() {
-    // 랜덤 폭의 바 40개
     const container = document.getElementById('barcode');
     container.innerHTML = '';
-    const widths = [1, 1, 2, 2, 3, 1, 2];
-    for (let i = 0; i < 40; i++) {
+    const widths = [1, 2, 1, 3, 2, 1, 2];
+    for (let i = 0; i < 36; i++) {
       const bar = document.createElement('span');
       bar.style.width = widths[Math.floor(Math.random() * widths.length)] + 'px';
-      bar.style.opacity = 0.6 + Math.random() * 0.4;
+      bar.style.opacity = 0.5 + Math.random() * 0.5;
       container.appendChild(bar);
     }
   }
 
-  function render() {
-    const today = new Date();
-    const expiry = new Date(today);
-    expiry.setDate(expiry.getDate() + 30);
+  function renderInitialDates() {
+    currentIssuedDate = new Date();
+    const expiry = new Date(currentIssuedDate);
+    expiry.setDate(expiry.getDate() + 30); // 기본 30일 설정
 
-    document.getElementById('issued-date').textContent = formatDate(today);
+    document.getElementById('issued-date').textContent = formatDate(currentIssuedDate);
     document.getElementById('valid-until').textContent = formatDate(expiry);
     document.getElementById('coupon-code').textContent = 'NO. ' + generateCouponCode();
     generateBarcode();
   }
 
   function regenerate() {
-    const coupon = document.getElementById('coupon');
-    coupon.style.animation = 'none';
-    coupon.offsetHeight; // reflow
-    coupon.style.animation = '';
-    render();
+    document.getElementById('coupon-code').textContent = 'NO. ' + generateCouponCode();
+    generateBarcode();
+    showToast('새 고유번호가 발급되었습니다');
   }
 
-  render();
+  // ═════════════════════════════════════════
+  // 6. 고해상도 이미지 다운로드
+  // ═════════════════════════════════════════
+  async function downloadCoupon() {
+    if (editMode) {
+      toggleEdit(); // 다운로드 시 자동 완료 처리
+    }
+
+    const downloadBtn = event.currentTarget;
+    const originalText = downloadBtn.textContent;
+    downloadBtn.textContent = '⏳ 이미지 생성 중...';
+    downloadBtn.disabled = true;
+
+    // 캡처 시 틸트 각도 원복
+    coupon.classList.add('no-tilt');
+    coupon.style.transform = 'none';
+
+    try {
+      const canvas = await html2canvas(coupon, {
+        backgroundColor: null,
+        scale: 3, // 고해상도 (300dpi급)
+        useCORS: true,
+        logging: false
+      });
+
+      const activePresetLabel = document.querySelector('.preset-btn.active')?.textContent || 'Voucher';
+      const cleanLabel = activePresetLabel.replace(/\s+/g, '_');
+      const dateStr = formatDate(new Date()).replace(/\./g, '');
+      const filename = `BANADA_${cleanLabel}_${dateStr}.png`;
+
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+
+      showToast('이미지 저장 완료 ✓');
+    } catch (err) {
+      console.error(err);
+      showToast('다운로드 실패. 다시 시도해 주세요');
+    } finally {
+      coupon.classList.remove('no-tilt');
+      downloadBtn.textContent = originalText;
+      downloadBtn.disabled = false;
+    }
+  }
+
+  // 토스트 메시지
+  let toastTimer;
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
+  // 초기화
+  renderInitialDates();
 </script>
 
 </body>
