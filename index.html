@@ -3,56 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BANADA · VIP Black Voucher</title>
+<title>BANADA · Special Luxury Voucher</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- 고급스러운 세리프 폰트와 깔끔한 산세리프 폰트 조합 -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,600;1,400&family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
-<!-- HTML2Canvas -->
+<!-- HTML2Canvas 라이브러리 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <style>
   :root {
-    /* 럭셔리 컬러 팔레트 */
-    --bg-color: #050505;
-    --card-bg-1: #111111;
-    --card-bg-2: #1a1a1a;
-    --gold-light: #F9F1CC;
-    --gold-main: #D4AF37;
-    --gold-dark: #AA771C;
-    --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
-    --text-white: #F8F9FA;
-    --text-gray: #A0A0A0;
-    --border-gold: rgba(212, 175, 55, 0.4);
+    --bg: #070708;
+    --card-bg-1: #111013;
+    --card-bg-2: #1c191c;
+    --gold-bright: #fbeabb;
+    --gold-main: #d4af37;
+    --gold-dark: #8c6a15;
+    --gold-gradient: linear-gradient(135deg, #fbeabb 0%, #d4af37 50%, #997519 100%);
+    --text-cream: #f7f5f0;
+    --text-dim: #9e9a93;
+    --line-gold: rgba(212, 175, 55, 0.35);
+    --line-gold-strong: rgba(212, 175, 55, 0.7);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background-color: var(--bg-color);
-    color: var(--text-white);
+    background: var(--bg);
+    color: var(--text-cream);
     font-family: 'Pretendard Variable', 'Montserrat', sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px 20px;
-    background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #050505 70%);
+    padding: 30px 15px;
+    background-image: 
+      radial-gradient(circle at 50% 10%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+      radial-gradient(circle at 80% 90%, rgba(140, 106, 21, 0.05) 0%, transparent 50%);
   }
 
-  .app-container {
+  .stage {
     width: 100%;
-    max-width: 800px;
+    max-width: 760px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 22px;
   }
 
-  /* --- 상단 프리셋 --- */
-  .preset-section {
+  /* ─── 1. 프리셋 선택 바 ─── */
+  .presets-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,424 +63,479 @@
 
   .section-title {
     font-family: 'Cinzel', serif;
-    font-size: 13px;
+    font-size: 11px;
     letter-spacing: 0.3em;
     color: var(--gold-main);
     text-transform: uppercase;
   }
 
-  .preset-list {
+  .presets {
     display: flex;
+    gap: 8px;
     flex-wrap: wrap;
-    gap: 10px;
     justify-content: center;
   }
 
   .preset-btn {
-    background: transparent;
-    border: 1px solid var(--border-gold);
-    color: var(--text-gray);
-    padding: 10px 20px;
-    border-radius: 4px;
+    padding: 9px 18px;
+    background: rgba(17, 16, 19, 0.8);
+    color: var(--text-dim);
+    border: 1px solid var(--line-gold);
+    border-radius: 999px;
     font-family: 'Pretendard Variable', sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
   }
 
   .preset-btn:hover {
-    color: var(--gold-light);
+    color: var(--gold-bright);
     border-color: var(--gold-main);
-    background: rgba(212, 175, 55, 0.05);
+    background: rgba(212, 175, 55, 0.08);
   }
 
   .preset-btn.active {
     background: var(--gold-gradient);
-    color: #000;
-    border-color: transparent;
+    color: #080705;
     font-weight: 700;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
   }
 
-  /* --- 바우처 본체 (블랙 카드 스타일) --- */
-  .voucher-wrapper {
+  /* ─── 2. 쿠폰 본체 ─── */
+  .coupon-wrap {
     width: 100%;
-    max-width: 720px;
-    padding: 15px; /* 캡처 시 여백 확보 */
+    max-width: 680px;
+    padding: 10px;
     position: relative;
   }
 
-  .voucher {
-    display: flex;
-    background: linear-gradient(135deg, var(--card-bg-1) 0%, var(--card-bg-2) 100%);
-    border-radius: 8px;
+  .coupon {
     position: relative;
+    width: 100%;
+    background: linear-gradient(135deg, var(--card-bg-1) 0%, var(--card-bg-2) 100%);
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: 1fr 140px;
     box-shadow: 
-      0 20px 50px rgba(0, 0, 0, 0.8),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-      inset 0 0 20px rgba(0, 0, 0, 0.5);
+      0 25px 60px rgba(0, 0, 0, 0.85),
+      0 0 40px rgba(212, 175, 55, 0.1),
+      inset 0 0 0 1px var(--line-gold);
     overflow: hidden;
   }
 
-  /* 금박 테두리 (가장자리 포인트) */
-  .voucher::before {
+  /* 내부 이중 디테일 테두리 */
+  .coupon::before {
     content: '';
     position: absolute;
-    top: 6px; left: 6px; right: 6px; bottom: 6px;
-    border: 1px solid var(--border-gold);
-    border-radius: 4px;
+    inset: 7px;
+    border: 1px dashed rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
     pointer-events: none;
     z-index: 1;
   }
 
-  /* 광택 효과 */
-  .voucher::after {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%; width: 50%; height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.03), transparent);
-    transform: skewX(-25deg);
-    animation: shine 8s infinite;
-    pointer-events: none;
-    z-index: 2;
-  }
-  @keyframes shine {
-    0% { left: -100%; }
-    20% { left: 200%; }
-    100% { left: 200%; }
-  }
-
-  /* 좌측 메인 영역 */
-  .v-main {
-    flex: 1;
-    padding: 40px;
+  /* 메인 섹션 */
+  .coupon-main {
+    padding: 36px 38px 30px;
     position: relative;
-    z-index: 10;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
 
-  .v-header {
+  .coupon-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
+    margin-bottom: 25px;
   }
 
+  /* 로고 영역 */
   .brand-area {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
   }
 
-  /* 커스텀 로고 업로드 영역 */
-  .logo-upload-wrap {
-    position: relative;
-    cursor: pointer;
-  }
-  .logo-upload-wrap input[type="file"] {
+  .logo-img {
+    height: 38px;
+    max-width: 180px;
+    object-fit: contain;
     display: none;
   }
-  .logo-image {
-    max-height: 40px;
-    max-width: 120px;
-    object-fit: contain;
-    display: none; /* 초기엔 숨김 */
-  }
+
   .logo-text {
     font-family: 'Cinzel', serif;
-    font-size: 26px;
-    font-weight: 700;
+    font-weight: 800;
+    font-size: 24px;
     letter-spacing: 0.25em;
     background: var(--gold-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-  }
-  .logo-upload-wrap:hover::after {
-    content: '로고 변경';
-    position: absolute;
-    top: -25px; left: 0;
-    background: #fff; color: #000;
-    font-size: 11px; padding: 2px 6px; border-radius: 3px;
-    white-space: nowrap;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
   }
 
-  .v-category {
+  .coupon-type {
     text-align: right;
-  }
-  .v-category-title {
     font-family: 'Cinzel', serif;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  .coupon-type strong {
+    display: block;
     color: var(--gold-main);
-    letter-spacing: 0.15em;
+    font-weight: 700;
+    font-size: 11px;
+    margin-top: 2px;
   }
-  .v-category-sub {
+
+  /* 바우처 내용 */
+  .coupon-body {
+    padding: 5px 0 20px;
+  }
+
+  .eyebrow {
+    font-family: 'Cinzel', serif;
     font-size: 10px;
-    color: var(--text-gray);
-    letter-spacing: 0.3em;
-    margin-top: 4px;
+    letter-spacing: 0.35em;
+    color: var(--gold-main);
     text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .v-body {
-    margin: 40px 0;
+  .eyebrow::after {
+    content: '';
+    flex: 1;
+    max-width: 40px;
+    height: 1px;
+    background: var(--gold-dark);
   }
 
-  .v-eyebrow {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--gold-light);
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-    display: inline-block;
-    border-bottom: 1px solid var(--border-gold);
-    padding-bottom: 5px;
-  }
-
-  .v-title-wrap {
+  .value-line {
     display: flex;
     align-items: baseline;
-    gap: 12px;
+    gap: 10px;
+    margin-bottom: 8px;
     flex-wrap: wrap;
-    margin-bottom: 12px;
   }
 
-  .v-value {
-    font-size: 64px;
-    font-weight: 700;
+  .value {
+    font-family: 'Pretendard Variable', sans-serif;
+    font-weight: 800;
+    font-size: 52px;
     line-height: 1;
     letter-spacing: -0.02em;
-    color: var(--text-white);
+    color: #ffffff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.6);
   }
 
-  .v-unit {
-    font-size: 32px;
-    font-weight: 500;
-    color: var(--gold-main);
+  .unit {
+    font-family: 'Pretendard Variable', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--gold-bright);
   }
 
-  .v-desc {
-    font-size: 14px;
-    color: #b0b0b0;
+  .subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
     font-weight: 300;
-    letter-spacing: -0.02em;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
   }
 
-  .v-footer {
-    display: flex;
-    gap: 40px;
+  /* 메타 정보 (발급일/유효기간) */
+  .coupon-meta {
+    padding-top: 16px;
+    border-top: 1px solid var(--line-gold);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
   }
 
-  .v-meta {
+  .meta-item {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 3px;
   }
 
-  .v-meta-label {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 9px;
-    color: var(--text-gray);
-    letter-spacing: 0.2em;
+  .meta-label {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.25em;
+    color: var(--gold-dark);
     text-transform: uppercase;
   }
 
-  .v-meta-value {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
+  .meta-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text-cream);
     font-weight: 500;
-    color: var(--gold-light);
-    letter-spacing: 0.05em;
   }
 
-  /* 우측 스텁(절취선) 영역 */
-  .v-stub {
-    width: 140px;
-    border-left: 2px dashed rgba(212, 175, 55, 0.3);
-    padding: 30px 15px;
+  /* 우측 절취 스텁 */
+  .coupon-stub {
+    border-left: 1px dashed var(--line-gold-strong);
+    background: rgba(0, 0, 0, 0.25);
+    padding: 25px 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     position: relative;
-    z-index: 10;
-    background: rgba(0,0,0,0.2);
+    z-index: 2;
   }
 
-  .stub-title {
+  .stub-seal {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--gold-main);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: 'Cinzel', serif;
-    font-size: 12px;
-    color: var(--gold-main);
-    letter-spacing: 0.3em;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold-bright);
+    background: rgba(212, 175, 55, 0.05);
+  }
+
+  .barcode {
+    display: flex;
+    gap: 2px;
+    height: 45px;
+    align-items: center;
+    opacity: 0.85;
+  }
+
+  .barcode span {
+    display: block;
+    width: 2px;
+    background: var(--text-cream);
+  }
+
+  .code-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
+  }
+
+  .stub-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--gold-main);
     text-transform: uppercase;
-    text-align: center;
-    height: 100px;
   }
 
-  .barcode-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-  }
-
-  .barcode-img {
-    width: 100%;
-    height: 60px;
-    background: repeating-linear-gradient(
-      90deg,
-      #fff,
-      #fff 2px,
-      transparent 2px,
-      transparent 5px,
-      #fff 5px,
-      #fff 6px,
-      transparent 6px,
-      transparent 9px
-    );
-    opacity: 0.7;
-  }
-
-  .serial-no {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 10px;
-    color: var(--text-gray);
-    letter-spacing: 0.1em;
-  }
-
-  /* --- 수정 가능 요소 (Edit Mode) --- */
+  /* ─── 3. 편집 상태 가이드 스타일 ─── */
   .editable {
-    outline: none;
-    border-radius: 4px;
+    outline: 1px dashed transparent;
+    outline-offset: 3px;
+    border-radius: 3px;
     transition: all 0.2s;
   }
+
   body.edit-mode .editable {
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.5);
+    outline-color: var(--line-gold-strong);
+    background: rgba(212, 175, 55, 0.12);
     cursor: text;
-    padding: 0 4px;
-  }
-  body.edit-mode .editable:focus {
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 0 2px var(--gold-main);
   }
 
-  /* --- 하단 컨트롤 패널 --- */
-  .control-panel {
+  body.edit-mode .editable:focus {
+    outline: 1px dashed var(--gold-bright);
+    background: rgba(212, 175, 55, 0.22);
+  }
+
+  /* ─── 4. 조작 컨트롤 패널 ─── */
+  .controls-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 14px;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 5px;
   }
 
-  .date-quick {
+  /* 로고 컨트롤 바 */
+  .logo-control-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(17, 16, 19, 0.9);
+    padding: 8px 20px;
+    border-radius: 999px;
+    border: 1px solid var(--line-gold);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .control-label {
+    font-size: 12px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .file-input-btn {
+    padding: 4px 12px;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid var(--gold-main);
+    color: var(--gold-bright);
+    border-radius: 4px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .file-input-btn:hover {
+    background: var(--gold-main);
+    color: #000;
+  }
+
+  .slider-wrap {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: rgba(255,255,255,0.05);
-    padding: 8px 16px;
-    border-radius: 50px;
   }
-  .date-quick span { font-size: 12px; color: var(--text-gray); }
-  .date-quick button {
-    background: none; border: none;
-    color: var(--gold-main);
-    font-size: 13px; font-weight: 500;
-    cursor: pointer; padding: 4px 8px;
-    transition: 0.2s;
-  }
-  .date-quick button:hover { color: #fff; }
 
-  .action-btns {
+  .size-slider {
+    width: 100px;
+    accent-color: var(--gold-main);
+    cursor: pointer;
+  }
+
+  /* 날짜 빠른 변경 */
+  .date-quick-bar {
     display: flex;
-    gap: 15px;
+    align-items: center;
+    gap: 8px;
+    background: rgba(17, 16, 19, 0.6);
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--line-gold);
+  }
+
+  .quick-btn {
+    background: none;
+    border: none;
+    color: var(--gold-main);
+    font-size: 12px;
+    font-family: 'Pretendard Variable', sans-serif;
+    cursor: pointer;
+    padding: 3px 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+
+  .quick-btn:hover {
+    background: rgba(212, 175, 55, 0.2);
+    color: var(--gold-bright);
+  }
+
+  /* 버튼 모음 */
+  .controls {
+    display: flex;
+    gap: 12px;
     flex-wrap: wrap;
     justify-content: center;
   }
 
   .btn {
-    padding: 14px 28px;
-    border-radius: 4px;
+    padding: 12px 24px;
+    background: transparent;
+    color: var(--text-cream);
+    border: 1px solid var(--line-gold-strong);
+    border-radius: 999px;
     font-family: 'Pretendard Variable', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
   }
 
-  .btn-secondary {
-    background: transparent;
-    border: 1px solid var(--border-gold);
-    color: var(--gold-light);
-  }
-  .btn-secondary:hover {
-    background: rgba(212, 175, 55, 0.1);
+  .btn:hover {
+    background: var(--gold-main);
+    color: #080705;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
   }
 
   .btn-primary {
     background: var(--gold-gradient);
-    border: none;
-    color: #000;
-  }
-  .btn-primary:hover {
-    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
-    transform: translateY(-2px);
+    color: #080705;
+    font-weight: 700;
+    border-color: transparent;
+    box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
   }
 
+  .btn-primary:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 6px 22px rgba(212, 175, 55, 0.5);
+  }
+
+  .btn.active {
+    background: var(--gold-main);
+    color: #080705;
+  }
+
+  /* 알림 토스트 */
   .toast {
     position: fixed;
     bottom: 30px;
     left: 50%;
-    transform: translateX(-50%) translateY(50px);
-    background: #fff;
-    color: #000;
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 14px;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--gold-bright);
+    color: #080705;
+    padding: 12px 28px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
     opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
     z-index: 1000;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
   }
+
   .toast.show {
     opacity: 1;
-    visibility: visible;
     transform: translateX(-50%) translateY(0);
   }
 
-  /* 모바일 대응 */
-  @media (max-width: 600px) {
-    .v-main { padding: 30px 20px; }
-    .v-value { font-size: 48px; }
-    .v-unit { font-size: 24px; }
-    .v-footer { gap: 20px; flex-direction: column; }
-    .v-stub { width: 100px; padding: 20px 10px; }
-    .logo-text { font-size: 20px; }
+  @media (max-width: 640px) {
+    .coupon { grid-template-columns: 1fr 110px; }
+    .coupon-main { padding: 25px 20px 20px; }
+    .value { font-size: 40px; }
+    .unit { font-size: 22px; }
+    .logo-text { font-size: 18px; }
   }
 </style>
 </head>
 <body>
 
-<div class="app-container">
-  
-  <!-- 1. 바우처 타입 선택 -->
-  <div class="preset-section">
-    <div class="section-title">Select Benefit</div>
-    <div class="preset-list">
+<div class="stage">
+
+  <!-- 1. 정확한 프리셋 바 -->
+  <div class="presets-wrapper">
+    <div class="section-title">Select Voucher Benefit</div>
+    <div class="presets">
       <button class="preset-btn active" data-preset="hour">1시간 추가</button>
       <button class="preset-btn" data-preset="meet">1회 만남 무료</button>
       <button class="preset-btn" data-preset="stocking">스타킹 무료</button>
@@ -488,246 +544,325 @@
     </div>
   </div>
 
-  <!-- 2. 바우처 본체 -->
-  <div class="voucher-wrapper" id="capture-area">
-    <div class="voucher">
+  <!-- 2. 쿠폰 본체 -->
+  <div class="coupon-wrap">
+    <div class="coupon" id="coupon">
       
-      <!-- 본문 -->
-      <div class="v-main">
-        <div class="v-header">
-          <!-- 커스텀 로고 영역 -->
+      <!-- 쿠폰 메인 -->
+      <div class="coupon-main">
+        <div class="coupon-header">
           <div class="brand-area">
-            <label class="logo-upload-wrap" title="클릭하여 로고 이미지 변경">
-              <input type="file" id="logo-upload" accept="image/*" onchange="handleLogoUpload(event)">
-              <img id="logo-image" class="logo-image" src="" alt="Brand Logo">
-              <div id="logo-text" class="logo-text editable" contenteditable="false">BANADA</div>
-            </label>
+            <img id="logo-img" class="logo-img" src="" alt="Brand Logo">
+            <div id="logo-text" class="logo-text editable" contenteditable="false">BANADA</div>
           </div>
-          <div class="v-category">
-            <div class="v-category-title editable" contenteditable="false">VIP BLACK</div>
-            <div class="v-category-sub editable" contenteditable="false">Exclusive Voucher</div>
+          <div class="coupon-type">
+            <span class="editable" contenteditable="false">Special Voucher</span><br>
+            <strong class="editable" contenteditable="false">VIP PRIVILEGE</strong>
           </div>
         </div>
 
-        <div class="v-body">
-          <div class="v-eyebrow editable" contenteditable="false">Complimentary Gift</div>
-          <div class="v-title-wrap">
-            <div class="v-value editable" contenteditable="false" id="val-num">1</div>
-            <div class="v-unit editable" contenteditable="false" id="val-unit">시간 추가</div>
+        <div class="coupon-body">
+          <div class="eyebrow editable" contenteditable="false">Complimentary Gift</div>
+          <div class="value-line">
+            <span class="value editable" contenteditable="false" id="val-num">1</span>
+            <span class="unit editable" contenteditable="false" id="val-unit">시간 추가</span>
           </div>
-          <div class="v-desc editable" contenteditable="false" id="val-sub">최고의 VIP 고객님께 드리는 특별한 여유 시간 제공권입니다.</div>
+          <div class="subtitle editable" contenteditable="false" id="val-sub">특별한 순간을 더욱 여유롭게 즐기실 수 있는 1시간 연장 혜택입니다.</div>
         </div>
 
-        <div class="v-footer">
-          <div class="v-meta">
-            <span class="v-meta-label">Date of Issue</span>
-            <span class="v-meta-value editable" contenteditable="false" id="issued-date">2026.10.24</span>
+        <div class="coupon-meta">
+          <div class="meta-item">
+            <div class="meta-label">Issued Date</div>
+            <div class="meta-value editable" contenteditable="false" id="issued-date">—</div>
           </div>
-          <div class="v-meta">
-            <span class="v-meta-label">Valid Thru</span>
-            <span class="v-meta-value editable" contenteditable="false" id="valid-until">2026.11.24</span>
+          <div class="meta-item">
+            <div class="meta-label">Valid Until</div>
+            <div class="meta-value editable" contenteditable="false" id="valid-until">—</div>
           </div>
         </div>
       </div>
 
-      <!-- 절취선(스텁) -->
-      <div class="v-stub">
-        <div class="stub-title">Admit One</div>
-        <div class="barcode-area">
-          <div class="barcode-img"></div>
-          <div class="serial-no" id="serial-no">BND-9X2A</div>
-        </div>
+      <!-- 쿠폰 스텁(절취선 영역) -->
+      <div class="coupon-stub">
+        <div class="stub-seal">VIP</div>
+        <div class="barcode" id="barcode"></div>
+        <div class="code-number" id="coupon-code">NO. —</div>
+        <div class="stub-label">Admit One</div>
       </div>
 
     </div>
   </div>
 
-  <!-- 3. 하단 컨트롤 -->
-  <div class="control-panel">
-    <div class="date-quick">
-      <span>유효기간 연장:</span>
-      <button onclick="addDays(30)">+30일</button>
-      <button onclick="addDays(60)">+60일</button>
-      <button onclick="setUnlimited()">무제한</button>
+  <!-- 3. 액션 패널 -->
+  <div class="controls-panel">
+    
+    <!-- 로고 설정 및 크기 조절 슬라이더 -->
+    <div class="logo-control-bar">
+      <div class="control-label">
+        <span>📷 로고 이미지:</span>
+        <label class="file-input-btn">
+          파일 선택
+          <input type="file" id="logo-file-input" accept="image/*" style="display:none;" onchange="uploadLogo(event)">
+        </label>
+        <button class="quick-btn" onclick="resetToTextLogo()">텍스트 로고 복원</button>
+      </div>
+      <div class="control-label slider-wrap">
+        <span>📐 로고 크기:</span>
+        <input type="range" class="size-slider" id="logo-size-slider" min="20" max="100" value="38" oninput="changeLogoSize(this.value)">
+      </div>
     </div>
 
-    <div class="action-btns">
-      <button class="btn btn-secondary" id="edit-toggle-btn" onclick="toggleEditMode()">
-        ✎ 직접 텍스트 수정
-      </button>
-      <button class="btn btn-secondary" onclick="generateSerial()">
-        ↻ 시리얼 넘버 갱신
-      </button>
-      <button class="btn btn-primary" onclick="downloadImage(this)">
-        ✨ 초고화질 다운로드
-      </button>
+    <!-- 유효기간 빠른 변경 -->
+    <div class="date-quick-bar">
+      <span class="control-label">유효기간 연장:</span>
+      <button class="quick-btn" onclick="setExpiryDays(30)">+30일</button>
+      <button class="quick-btn" onclick="setExpiryDays(60)">+60일</button>
+      <button class="quick-btn" onclick="setExpiryDays(90)">+90일</button>
+      <button class="quick-btn" onclick="setExpiryUnlimited()">상시 유효 (무제한)</button>
+    </div>
+
+    <!-- 기능 버튼 -->
+    <div class="controls">
+      <button class="btn" id="edit-btn" onclick="toggleEdit()">✎ 글자/날짜 직접 수정</button>
+      <button class="btn" onclick="regenerateCode()">↻ 번호 재발급</button>
+      <button class="btn btn-primary" onclick="downloadCouponImage(this)">⬇ 초고화질 저장</button>
     </div>
   </div>
 
 </div>
 
-<div class="toast" id="toast">메시지</div>
+<div class="toast" id="toast">다운로드 완료 ✓</div>
 
 <script>
-  // --- 1. 텍스트 데이터 셋팅 ---
+  // ═════════════════════════════════════════
+  // 1. 정확히 요구된 5가지 프리셋
+  // ═════════════════════════════════════════
   const PRESETS = {
-    hour:     { num: '1',     unit: '시간 추가',  sub: '최고의 VIP 고객님께 드리는 특별한 여유 시간 제공권입니다.', eyebrow: 'Complimentary Gift' },
-    meet:     { num: '1회',   unit: '만남 무료',  sub: '소중한 하루를 위해 준비한 특별한 무료 이용권입니다.', eyebrow: 'Special Privilege' },
-    stocking: { num: 'Free', unit: '스타킹',     sub: '원하시는 스타일의 최고급 스타킹 옵션이 무료 제공됩니다.', eyebrow: 'Premium Option' },
-    option:   { num: '1ea',  unit: '옵션 무료',  sub: '원하시는 어떠한 옵션이든 1가지를 무료로 선택하실 수 있습니다.', eyebrow: 'Choice Voucher' },
-    cosplay:  { num: 'Free', unit: '코스프레',   sub: '다채로운 연출을 위한 프리미엄 테마 의상 옵션을 제공합니다.', eyebrow: 'Special Theme' }
+    hour:     { num: '1',      unit: '시간 추가',    sub: '특별한 순간을 더욱 여유롭게 즐기실 수 있는 1시간 연장 혜택입니다.', eyebrow: 'Complimentary Gift' },
+    meet:     { num: '1회',    unit: '만남 무료',    sub: '소중한 하루를 위해 준비한 1회 무료 이용 혜택입니다.', eyebrow: 'Special Privilege' },
+    stocking: { num: 'FREE',   unit: '스타킹 무료',  sub: '원하시는 스타일의 고급 스타킹 옵션이 무료로 제공됩니다.', eyebrow: 'Premium Option' },
+    option:   { num: '1개',    unit: '옵션 무료',    sub: '원하시는 맞춤형 옵션 1가지를 무료로 선택하실 수 있습니다.', eyebrow: 'Choice Voucher' },
+    cosplay:  { num: 'FREE',   unit: '코스프레 무료', sub: '다채롭고 특별한 연출을 위한 테마 의상 옵션을 제공합니다.', eyebrow: 'Special Theme' }
   };
 
-  // 프리셋 버튼 클릭 이벤트
+  // ═════════════════════════════════════════
+  // 2. 프리셋 선택 처리
+  // ═════════════════════════════════════════
   document.querySelectorAll('.preset-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      const presetKey = btn.dataset.preset;
+      const preset = PRESETS[presetKey];
+      if (!preset) return;
+
       document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      const data = PRESETS[btn.dataset.preset];
-      document.getElementById('val-num').textContent = data.num;
-      document.getElementById('val-unit').textContent = data.unit;
-      document.getElementById('val-sub').textContent = data.sub;
-      document.querySelector('.v-eyebrow').textContent = data.eyebrow;
+      document.getElementById('val-num').textContent = preset.num;
+      document.getElementById('val-unit').textContent = preset.unit;
+      document.getElementById('val-sub').textContent = preset.sub;
+      document.querySelector('.eyebrow').textContent = preset.eyebrow;
     });
   });
 
-  // --- 2. 로고 업로드 처리 ---
-  function handleLogoUpload(event) {
+  // ═════════════════════════════════════════
+  // 3. 로고 업로드 & 크기 조절 기능
+  // ═════════════════════════════════════════
+  function uploadLogo(event) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = function(e) {
-        const imgEl = document.getElementById('logo-image');
-        const textEl = document.getElementById('logo-text');
-        imgEl.src = e.target.result;
-        imgEl.style.display = 'block';
-        textEl.style.display = 'none';
-        showToast('로고 이미지가 적용되었습니다.');
-      }
+        const logoImg = document.getElementById('logo-img');
+        const logoText = document.getElementById('logo-text');
+        logoImg.src = e.target.result;
+        logoImg.style.display = 'block';
+        logoText.style.display = 'none';
+        showToast('로고 이미지가 등록되었습니다');
+      };
       reader.readAsDataURL(file);
     }
   }
 
-  // --- 3. 날짜 및 시리얼 관리 ---
-  let issueDate = new Date();
-
-  function formatDate(date) {
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, '0');
-    const d = String(date.getDate()).padStart(2, '0');
-    return `${y}.${m}.${d}`;
+  function resetToTextLogo() {
+    const logoImg = document.getElementById('logo-img');
+    const logoText = document.getElementById('logo-text');
+    logoImg.style.display = 'none';
+    logoText.style.display = 'block';
+    showToast('텍스트 로고로 복원되었습니다');
   }
 
-  function addDays(days) {
-    const expDate = new Date(issueDate);
-    expDate.setDate(expDate.getDate() + days);
-    document.getElementById('valid-until').textContent = formatDate(expDate);
-    showToast(`유효기간이 +${days}일 연장되었습니다.`);
-  }
-
-  function setUnlimited() {
-    document.getElementById('valid-until').textContent = 'NO EXPIRY (무제한)';
-    showToast('유효기간이 무제한으로 설정되었습니다.');
-  }
-
-  function generateSerial() {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-    let serial = 'BND-';
-    for(let i=0; i<4; i++) {
-      serial += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    document.getElementById('serial-no').textContent = serial;
-    // 바코드 패턴 랜덤화
-    document.querySelector('.barcode-img').style.backgroundPosition = `${Math.random() * 100}px 0`;
-  }
-
-  function initVoucher() {
-    document.getElementById('issued-date').textContent = formatDate(issueDate);
-    addDays(30); // 기본 30일
-    generateSerial();
-  }
-
-  // --- 4. 직접 수정 모드 ---
-  let isEditMode = false;
-  function toggleEditMode() {
-    isEditMode = !isEditMode;
-    document.body.classList.toggle('edit-mode', isEditMode);
+  function changeLogoSize(val) {
+    const logoImg = document.getElementById('logo-img');
+    const logoText = document.getElementById('logo-text');
     
-    const editBtn = document.getElementById('edit-toggle-btn');
-    editBtn.innerHTML = isEditMode ? '✓ 텍스트 수정 완료' : '✎ 직접 텍스트 수정';
+    // 이미지 로고 크기 변경
+    logoImg.style.height = val + 'px';
     
+    // 텍스트 로고 폰트 크기 비율 연동 (슬라이더 수치 비례)
+    const fontSize = Math.max(16, Math.min(48, Math.round(val * 0.65)));
+    logoText.style.fontSize = fontSize + 'px';
+  }
+
+  // ═════════════════════════════════════════
+  // 4. 편집 모드 제어 (수정 내용 보존)
+  // ═════════════════════════════════════════
+  let editMode = false;
+
+  function toggleEdit() {
+    editMode = !editMode;
+    document.body.classList.toggle('edit-mode', editMode);
+    
+    const editBtn = document.getElementById('edit-btn');
+    editBtn.classList.toggle('active', editMode);
+    editBtn.textContent = editMode ? '✓ 편집 완료 (저장)' : '✎ 글자/날짜 직접 수정';
+
     document.querySelectorAll('.editable').forEach(el => {
-      el.setAttribute('contenteditable', isEditMode ? 'true' : 'false');
+      el.setAttribute('contenteditable', editMode ? 'true' : 'false');
     });
 
-    if (isEditMode) {
-      showToast('변경하려는 텍스트를 클릭하여 수정하세요.');
+    if (editMode) {
+      showToast('원하는 글자나 날짜를 클릭하여 수정하세요!');
+    } else {
+      showToast('수정 내용이 정상 적용되었습니다');
     }
   }
 
-  // 엔터키 방지 (줄바꿈 방지)
+  // 줄바꿈 방지
   document.addEventListener('keydown', (e) => {
     if (e.target.classList.contains('editable') && e.key === 'Enter') {
-      e.preventDefault();
-      e.target.blur();
+      if (!e.target.classList.contains('subtitle')) {
+        e.preventDefault();
+        e.target.blur();
+      }
     }
   });
 
-  // --- 5. 초고화질 이미지 다운로드 (가독성 개선) ---
-  async function downloadImage(btn) {
-    if (isEditMode) toggleEditMode(); // 다운로드 시 편집 모드 강제 종료
+  // ═════════════════════════════════════════
+  // 5. 날짜 및 번호 생성
+  // ═════════════════════════════════════════
+  let currentIssuedDate = new Date();
 
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '⏳ 렌더링 중...';
-    btn.style.pointerEvents = 'none';
+  function formatDate(d) {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}.${m}.${day}`;
+  }
 
-    const captureArea = document.getElementById('capture-area');
+  function setExpiryDays(days) {
+    const expiry = new Date(currentIssuedDate);
+    expiry.setDate(expiry.getDate() + days);
+    document.getElementById('valid-until').textContent = formatDate(expiry);
+    showToast(`유효기간이 +${days}일 설정되었습니다`);
+  }
+
+  function setExpiryUnlimited() {
+    document.getElementById('valid-until').textContent = '상시 유효 (NO EXPIRY)';
+    showToast('유효기간이 무제한으로 설정되었습니다');
+  }
+
+  function generateCouponCode() {
+    const chars = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+    let code = 'BND-';
+    for (let i = 0; i < 4; i++) code += chars[Math.floor(Math.random() * chars.length)];
+    code += '-';
+    for (let i = 0; i < 4; i++) code += chars[Math.floor(Math.random() * chars.length)];
+    return code;
+  }
+
+  function generateBarcode() {
+    const container = document.getElementById('barcode');
+    container.innerHTML = '';
+    const widths = [1, 2, 1, 3, 2, 1, 2];
+    for (let i = 0; i < 34; i++) {
+      const bar = document.createElement('span');
+      bar.style.width = widths[Math.floor(Math.random() * widths.length)] + 'px';
+      bar.style.opacity = 0.5 + Math.random() * 0.5;
+      container.appendChild(bar);
+    }
+  }
+
+  function renderInitialDates() {
+    currentIssuedDate = new Date();
+    const expiry = new Date(currentIssuedDate);
+    expiry.setDate(expiry.getDate() + 30);
+
+    document.getElementById('issued-date').textContent = formatDate(currentIssuedDate);
+    document.getElementById('valid-until').textContent = formatDate(expiry);
+    document.getElementById('coupon-code').textContent = 'NO. ' + generateCouponCode();
+    generateBarcode();
+  }
+
+  function regenerateCode() {
+    document.getElementById('coupon-code').textContent = 'NO. ' + generateCouponCode();
+    generateBarcode();
+    showToast('새 고유번호가 발급되었습니다');
+  }
+
+  // ═════════════════════════════════════════
+  // 6. 초고화질 이미지 다운로드 (수정사항 100% 반영)
+  // ═════════════════════════════════════════
+  async function downloadCouponImage(downloadBtn) {
+    // 1) 현재 수정 중인 텍스트가 있다면 포커스 해제하여 DOM에 확실히 갱신
+    if (document.activeElement) {
+      document.activeElement.blur();
+    }
+
+    // 2) 편집 가이드 테두리가 이미지에 찍히지 않도록 편집 모드 해제
+    if (editMode) {
+      toggleEdit();
+    }
+
+    const originalText = downloadBtn.textContent;
+    downloadBtn.textContent = '⏳ 고화질 렌더링 중...';
+    downloadBtn.style.pointerEvents = 'none';
+
+    const couponElement = document.getElementById('coupon');
 
     try {
-      // 폰트가 모두 로드될 때까지 대기하여 뭉개짐 방지
-      await document.fonts.ready; 
+      // 폰트 완벽 로딩 대기
+      await document.fonts.ready;
 
-      const canvas = await html2canvas(captureArea, {
-        backgroundColor: null, // 투명 배경 허용
-        scale: 4, // 기존 3에서 4로 증가시켜 초고해상도(4K급) 캡처
+      // html2canvas 실행 (4배 스케일로 초고해상도 캡처)
+      const canvas = await html2canvas(couponElement, {
+        backgroundColor: null,
+        scale: 4, 
         useCORS: true,
         logging: false
       });
 
-      const activeLabel = document.querySelector('.preset-btn.active').textContent.replace(/\s/g, '');
+      const activePresetLabel = document.querySelector('.preset-btn.active')?.textContent || 'Voucher';
+      const cleanLabel = activePresetLabel.replace(/\s+/g, '_');
       const dateStr = formatDate(new Date()).replace(/\./g, '');
-      const filename = `VIP_Voucher_${activeLabel}_${dateStr}.png`;
+      const filename = `BANADA_${cleanLabel}_${dateStr}.png`;
 
       const link = document.createElement('a');
       link.download = filename;
       link.href = canvas.toDataURL('image/png', 1.0);
       link.click();
 
-      showToast('✨ 고화질 바우처가 저장되었습니다.');
-    } catch (error) {
-      console.error(error);
-      showToast('오류가 발생했습니다. 다시 시도해주세요.');
+      showToast('이미지 저장 완료 ✓');
+    } catch (err) {
+      console.error(err);
+      showToast('다운로드 실패. 다시 시도해 주세요');
     } finally {
-      btn.innerHTML = originalText;
-      btn.style.pointerEvents = 'auto';
+      downloadBtn.textContent = originalText;
+      downloadBtn.style.pointerEvents = 'auto';
     }
   }
 
-  // --- 6. 토스트 메시지 UI ---
-  let toastTimeout;
+  // 토스트 메시지
+  let toastTimer;
   function showToast(msg) {
     const toast = document.getElementById('toast');
     toast.textContent = msg;
     toast.classList.add('show');
-    clearTimeout(toastTimeout);
-    toastTimeout = setTimeout(() => {
-      toast.classList.remove('show');
-    }, 2500);
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
   }
 
-  // 실행
-  initVoucher();
+  // 초기 실행
+  renderInitialDates();
 </script>
 
 </body>
